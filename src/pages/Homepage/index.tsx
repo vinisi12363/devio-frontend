@@ -1,8 +1,12 @@
-import MainContainer from "../../Components/MainContainer";
 
+import { MainContainer } from "../../Components/MainContainer";
+import Header from "../../Components/Header";
 export default function HomePage(){
     return(
-            <MainContainer></MainContainer>
+
+            <MainContainer>
+                <Header></Header>
+            </MainContainer>
     );
 
 }
