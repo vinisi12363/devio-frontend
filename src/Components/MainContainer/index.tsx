@@ -1,10 +1,15 @@
-import { Body } from "./Body";
+import { MainBody } from "./Body";
 
-export default function MainContainer(){
+type MainContainerProps = {
+    children: React.ReactNode;
+};
+  
+export const MainContainer: React.FC<MainContainerProps> = ({ children }) => {
 
+  
     return(
-        <Body>
-            <h1>Test</h1>
-        </Body>
+        <MainBody>
+           {children}
+        </MainBody>
     );
 }
