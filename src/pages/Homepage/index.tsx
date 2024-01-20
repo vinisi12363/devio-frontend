@@ -14,6 +14,8 @@ import RefrigerantePng from "../../assets/latinhas.png";
 import { Footer } from "../../Components/Footer";
 import { ProductsApi } from "../../Api/ProductsApi";
 import { useEffect, useState } from "react";
+import { useContextCategory } from "../../Contexts/CategoryContext";
+
 
 type Product = {
     produto_id: number;
@@ -26,7 +28,8 @@ type Product = {
 
 export default function HomePage() {
   const [products, setProducts] = useState([]);
-
+  const {category} = useContextCategory();
+  console.log("category" , category);
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -69,7 +72,14 @@ export default function HomePage() {
                products.map((p:Product) => {
                 return(
                     
-                    <ShowCardContainer  key={p.produto_id}>
+                    <ShowCardContainer  displayType = {
+                        category === "HamburguerPng" && p.imagem === "HamburgerPng" ||  
+                        category === "PizzaPng" && p.imagem === "PizzaPng" ||
+                        category === "RefrigerantePng" && p.imagem === "RefrigerantePng" || 
+                        !category ? "flex" : "none"  
+                        
+                       
+                    }key={p.produto_id}>
                       <div className="ProductImageArea">
                         <img src={
                             p.imagem === "HamburgerPng" ? HamburgerPng : '' ||

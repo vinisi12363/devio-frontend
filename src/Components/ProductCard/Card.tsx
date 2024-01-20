@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+type styledCardProps = {
+    displayType:string;
+}
 
 export const CardContainer = styled.div`
     width: 200px;
@@ -29,11 +32,11 @@ export const CardContainer = styled.div`
     }
 `
 
-export const ShowCardContainer = styled.div`
+export const ShowCardContainer = styled.div<styledCardProps>`
     width: 250px;
     height: auto;
     background-color: #fff;
-    display: flex;
+    display: ${props=>props.displayType};
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
