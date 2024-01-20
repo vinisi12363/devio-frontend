@@ -45,7 +45,7 @@ export const ShowCardContainer = styled.div`
     }
     margin: 25px 25px 15px 10px;
 
-    background-image: url('https://as2.ftcdn.net/v2/jpg/02/91/13/09/1000_F_291130967_RU7eKKmBDoYVK6leV81HaZzlsuunSjcj.jpg'); 
+    background-image: url('https://img.freepik.com/free-vector/color-doodle-food-burger-pattern_1409-3918.jpg'); 
     background-size: cover; 
     background-position: center;
     img{
