@@ -3,10 +3,11 @@ import { P } from "./Title";
 
 export type TextType = { 
     text: string
+    textSize:string
 };	
 
 export const Subtitle = (data: TextType) =>{
     return(
-        <P>{data.text}</P>
+        <P textSize={data.textSize}>{data.text}</P>
     );
 }
