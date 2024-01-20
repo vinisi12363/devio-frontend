@@ -9,6 +9,7 @@ import { CardContainerArea } from "../../Components/CardContainer";
 import {ProductsAreaContainer} from "../../Components/ProductsAreaContainer";
 import {ShowCardContainer} from "../../Components/ProductCard/Card";
 import HamburgerPng from "../../assets/combo.png";
+import { Footer } from "../../Components/Footer";
 
 export default function HomePage(){
     return(
@@ -127,6 +128,7 @@ export default function HomePage(){
                     </div>
                       
                 </ProductsAreaContainer>
+                <Footer></Footer>
             </MainContainer>
         
         
