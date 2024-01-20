@@ -2,9 +2,11 @@ import styled from "styled-components";
 
 export const InputContainer = styled.div`
     width: 40%;
-    height: 6vh;
-    background-color: lightgrey;
+    height: 8vh;
+    background-color: white;
     font-family: 'Roboto', sans-serif;
+    border: 3px solid #e0e0e0;
+    border-radius: 15px;
     font-size: 5px;
     display: flex;
     justify-content: space-between;
@@ -25,6 +27,7 @@ export const Input = styled.input`
     font-size: 2rem;
     font-weight: 500;
     color: #333;
+
     background-color: transparent;
     &::placeholder{
         color: #999;
@@ -34,19 +37,13 @@ export const InputButton = styled.button`
     width: 2.5vw;
     height: 100%;
     border-radius:50%;
-    outline: none;
-    background-color: lightgreen;
+    background-color: transparent;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2rem;
+    border: none;    
+    font-size: 4rem;
     color: #333;
     font-weight: 500;
     transition: .3s;
-    &:hover{
-        color: #666;
-    }
     position: relative;
-    left:35px;
+    top:5px;
 `

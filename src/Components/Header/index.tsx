@@ -1,9 +1,16 @@
-import { HeaderInfo } from './Header';
+import { HeaderInfo, HeaderOptionContainer, HeaderLogo } from './Header';
 
 export default function Header (){
     return (
         <HeaderInfo>
-            <h1>Test</h1>
+            <HeaderLogo>
+                <p>VINI FAST FOOD</p>
+            </HeaderLogo>
+            <HeaderOptionContainer>
+                <p>Pedidos</p>
+                <p>Cozinha</p>
+                <p>Retirada</p>
+            </HeaderOptionContainer>
         </HeaderInfo>
     );
 

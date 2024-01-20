@@ -21,9 +21,10 @@ export const CardContainer = styled.div`
     img{
         width: 190px;
         height: 190px;
-        object-fit: cover;
         border-radius: 10px;
+        object-fit: contain;
     }
+   
 `
 
 export const ShowCardContainer = styled.div`
