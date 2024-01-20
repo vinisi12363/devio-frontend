@@ -4,7 +4,7 @@ type PProps = {
     textSize: string;
   };
 
-export const P = styled.p<PProps>`
+export const StyledP = styled.p<PProps>`
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: ${props => props.textSize}px;

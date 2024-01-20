@@ -1,4 +1,4 @@
-import { P } from "./Title";
+import { StyledP } from "./Title";
 
 
 export type TextType = { 
@@ -8,6 +8,6 @@ export type TextType = {
 
 export const Subtitle = (data: TextType) =>{
     return(
-        <P textSize={data.textSize}>{data.text}</P>
+        <StyledP textSize={data.textSize}>{data.text}</StyledP>
     );
 }

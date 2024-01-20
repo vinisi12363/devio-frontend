@@ -1,4 +1,4 @@
-import { H2 } from "./Title";
+import { StyledH2 } from "./Title";
 
 export type TextType = { 
     text: string
@@ -7,6 +7,6 @@ export type TextType = {
 
 export const Title = (data: TextType) =>{
     return(
-        <H2 textSize={data.textSize}>{data.text}</H2>
+        <StyledH2 textSize={data.textSize}>{data.text}</StyledH2>
     );
 }
