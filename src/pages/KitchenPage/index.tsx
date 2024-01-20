@@ -15,6 +15,7 @@ export default function KitchenPage() {
                 <KitchenPreparingBox>
                     <Title text="Preparando:" textSize="35"></Title>
                     <KitchenOrderCard></KitchenOrderCard>
+                    
                 </KitchenPreparingBox>
                 <KitchenReadyBox>
                     <Title text="Pronto:" textSize="35"></Title>

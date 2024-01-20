@@ -11,12 +11,34 @@ import { ShowCardContainer } from "../../Components/ProductCard/Card";
 import HamburgerPng from "../../assets/hamburguer.png";
 import RefrigeranteImg from "../../assets/latinhas.png";
 import { Footer } from "../../Components/Footer";
+import { ProductsApi } from "../../Api/ProductsApi";
+import { useEffect, useState } from "react";
 
 export default function HomePage() {
+  const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+
+                const result = await ProductsApi.getAllProducts();
+                if(result)
+                    setProducts(result);
+            } catch (error) {
+                console.log(error);
+            }
+           
+        }
+        fetchProducts();
+    }, []);
+ 
+
+    console.log(products);
+
   return (
     <MainContainer>
       <PageBody>
-        
+
         <Header></Header>
         <SearchArea></SearchArea>
 
@@ -25,6 +47,7 @@ export default function HomePage() {
           <Subtitle textSize="20" text={"Navegue por categoria"}></Subtitle>
           <CardContainerArea></CardContainerArea>
         </CategoriesSection>
+        
         <ProductsAreaContainer>
           <div className="ProductsTextArea">
             <Title text={"Produtos"} textSize="30"></Title>
