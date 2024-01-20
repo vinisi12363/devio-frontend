@@ -15,6 +15,7 @@ import { Footer } from "../../Components/Footer";
 import { ProductsApi } from "../../Api/ProductsApi";
 import { useEffect, useState } from "react";
 import { useContextCategory } from "../../Contexts/CategoryContext";
+import ModalComponent from "../../Components/OrderModal";
 
 
 type Product = {
@@ -29,7 +30,7 @@ type Product = {
 export default function HomePage() {
   const [products, setProducts] = useState([]);
   const {category} = useContextCategory();
-  console.log("category" , category);
+ 
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -47,10 +48,14 @@ export default function HomePage() {
 
 
   return (
+    <>
+    
     <MainContainer>
+    <ModalComponent></ModalComponent>
       <PageBody>
-
+      
         <Header></Header>
+
         <SearchArea></SearchArea>
 
         <CategoriesSection>
@@ -104,5 +109,6 @@ export default function HomePage() {
         <Footer></Footer>
       </PageBody>
     </MainContainer>
+    </>
   );
 }
