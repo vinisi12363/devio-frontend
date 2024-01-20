@@ -13,6 +13,9 @@ export const HeaderInfo = styled.div`
     position: fixed;
     top: 0;
     z-index: 1;
+    .pageLink{
+        text-decoration: none;
+    }
 `
 export const HeaderLogo = styled.div`
     width: 10vw;

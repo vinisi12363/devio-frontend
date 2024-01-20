@@ -17,5 +17,6 @@ export const PageBody = styled.div`
     display:flex; 
     flex-direction: column;
     align-items: center;
-    box-sizing: border-box; 
+    box-sizing: border-box;
+    margin-top: 10vh; 
 `
