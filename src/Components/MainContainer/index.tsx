@@ -6,7 +6,6 @@ type MainContainerProps = {
   
 export const MainContainer: React.FC<MainContainerProps> = ({ children }) => {
 
-  
     return(
         <MainBody>
            {children}
