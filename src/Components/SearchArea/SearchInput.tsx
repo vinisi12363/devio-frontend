@@ -14,7 +14,7 @@ export const InputContainer = styled.div`
     padding: 0 2vw;
     box-sizing: border-box;
     border-bottom: 1px solid #e0e0e0;
-    margin-top: 10vh;
+    margin-top: 0vh;
     position: relative;
     top:30px;
 `

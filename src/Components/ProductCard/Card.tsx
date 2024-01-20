@@ -24,12 +24,14 @@ export const CardContainer = styled.div`
         border-radius: 10px;
         object-fit: contain;
     }
-   
+    .productTitle{
+        background-color: green;
+    }
 `
 
 export const ShowCardContainer = styled.div`
     width: 250px;
-    height: 400px;
+    height: auto;
     background-color: #fff;
     display: flex;
     flex-direction: column;

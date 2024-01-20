@@ -9,10 +9,20 @@ import { CardContainerArea } from "../../Components/CardContainer";
 import { ProductsAreaContainer } from "../../Components/ProductsAreaContainer";
 import { ShowCardContainer } from "../../Components/ProductCard/Card";
 import HamburgerPng from "../../assets/hamburguer.png";
-import RefrigeranteImg from "../../assets/latinhas.png";
+import PizzaPng from "../../assets/pizza1.png";
+import RefrigerantePng from "../../assets/latinhas.png";
 import { Footer } from "../../Components/Footer";
 import { ProductsApi } from "../../Api/ProductsApi";
 import { useEffect, useState } from "react";
+
+type Product = {
+    produto_id: number;
+    descricao: string;
+    preco: number;
+    codigo:string;
+    nome: string;
+    imagem: string;
+}
 
 export default function HomePage() {
   const [products, setProducts] = useState([]);
@@ -31,9 +41,7 @@ export default function HomePage() {
         }
         fetchProducts();
     }, []);
- 
 
-    console.log(products);
 
   return (
     <MainContainer>
@@ -47,7 +55,7 @@ export default function HomePage() {
           <Subtitle textSize="20" text={"Navegue por categoria"}></Subtitle>
           <CardContainerArea></CardContainerArea>
         </CategoriesSection>
-        
+
         <ProductsAreaContainer>
           <div className="ProductsTextArea">
             <Title text={"Produtos"} textSize="30"></Title>
@@ -57,87 +65,31 @@ export default function HomePage() {
             ></Subtitle>
           </div>
           <div className="showCardsArea">
-            <ShowCardContainer>
-              <div className="ProductImageArea">
-                <img src={HamburgerPng}></img>
-              </div>
-              <div className="ProductInfoArea">
-                <Title text="Smash da casa" textSize="20"></Title>
-                <Subtitle text="200gr de carne" textSize="20"></Subtitle>
-                <Title text="R$35,00" textSize="20"></Title>
-              </div>
-            </ShowCardContainer>
-            <ShowCardContainer>
-              <div className="ProductImageArea">
-                <img src={RefrigeranteImg}></img>
-              </div>
-              <div className="ProductInfoArea">
-                <Title text="Smash da casa" textSize="20"></Title>
-                <Subtitle text="200gr de carne" textSize="20"></Subtitle>
-                <Title text="R$35,00" textSize="20"></Title>
-              </div>
-            </ShowCardContainer>{" "}
-            <ShowCardContainer>
-              <div className="ProductImageArea">
-                <img src={HamburgerPng}></img>
-              </div>
-              <div className="ProductInfoArea">
-                <Title text="Smash da casa" textSize="20"></Title>
-                <Subtitle text="200gr de carne" textSize="20"></Subtitle>
-                <Title text="R$35,00" textSize="20"></Title>
-              </div>
-            </ShowCardContainer>{" "}
-            <ShowCardContainer>
-              <div className="ProductImageArea">
-                <img src={HamburgerPng}></img>
-              </div>
-              <div className="ProductInfoArea">
-                <Title text="Smash da casa" textSize="20"></Title>
-                <Subtitle text="200gr de carne" textSize="20"></Subtitle>
-                <Title text="R$35,00" textSize="20"></Title>
-              </div>
-            </ShowCardContainer>{" "}
-            <ShowCardContainer>
-              <div className="ProductImageArea">
-                <img src={HamburgerPng}></img>
-              </div>
-              <div className="ProductInfoArea">
-                <Title text="Smash da casa" textSize="20"></Title>
-                <Subtitle text="200gr de carne" textSize="20"></Subtitle>
-                <Title text="R$35,00" textSize="20"></Title>
-              </div>
-            </ShowCardContainer>{" "}
-            <ShowCardContainer>
-              <div className="ProductImageArea">
-                <img src={HamburgerPng}></img>
-              </div>
-              <div className="ProductInfoArea">
-                <Title text="Smash da casa" textSize="20"></Title>
-                <Subtitle text="200gr de carne" textSize="20"></Subtitle>
-                <Title text="R$35,00" textSize="20"></Title>
-              </div>
-            </ShowCardContainer>
-            <ShowCardContainer>
-              <div className="ProductImageArea">
-                <img src={HamburgerPng}></img>
-              </div>
-              <div className="ProductInfoArea">
-                <Title text="Smash da casa" textSize="20"></Title>
-                <Subtitle text="200gr de carne" textSize="20"></Subtitle>
-                <Title text="R$35,00" textSize="20"></Title>
-              </div>
-            </ShowCardContainer>
-            <ShowCardContainer>
-              <div className="ProductImageArea">
-                <img src={HamburgerPng}></img>
-              </div>
-              <div className="ProductInfoArea">
-                <Title text="Smash da casa" textSize="20"></Title>
-                <Subtitle text="200gr de carne" textSize="20"></Subtitle>
-                <Title text="R$35,00" textSize="20"></Title>
-              </div>
-            </ShowCardContainer>
-          </div>
+            {
+               products.map((p:Product) => {
+                return(
+                    
+                    <ShowCardContainer  key={p.produto_id}>
+                      <div className="ProductImageArea">
+                        <img src={
+                            p.imagem === "HamburgerPng" ? HamburgerPng : '' ||
+                            p.imagem === "PizzaPng" ? PizzaPng : '' ||
+                            p.imagem === "RefrigerantePng" ? RefrigerantePng : ''
+                        }></img>
+                      </div>
+                      <div className="ProductInfoArea">
+                        <Title text={p.nome} textSize="20"></Title>
+                        <Subtitle text={p.descricao} textSize="20"></Subtitle>
+                        <Title text={`R$${p.preco}`} textSize="20"></Title>
+                      </div>
+                    </ShowCardContainer>
+                  
+                );
+              
+               })
+            }
+         </div>
+
         </ProductsAreaContainer>
         <Footer></Footer>
       </PageBody>
