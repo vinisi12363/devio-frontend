@@ -27,9 +27,9 @@ export default function ModalComponent({
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const { produto, chooseProduct } = useContextProduct();
+  const { produtoSelecionado, chooseProduct } = useContextProduct();
   // const { order, fetchOrder } = useOrderContext();
-  const [nomeCliente, setNomeCliente] = useState("");
+
   const [valorAdicional, setValorAdicional] = useState(0);
   const [valorTotal, setValorTotal] = useState(0);
 
@@ -56,11 +56,11 @@ export default function ModalComponent({
 
   useEffect(() => {
     setValorTotal(
-      produto.reduce((acc, curr) => {
+      produtoSelecionado.reduce((acc, curr) => {
         return acc + curr.preco * curr.quantidade;
       }, 0) + valorAdicional
     );
-  }, [produto]);
+  }, [produtoSelecionado, valorAdicional]);
 
   const acrescentarAdicional = (valor: number) => {
     setValorAdicional(valorAdicional + valor);
@@ -74,7 +74,7 @@ export default function ModalComponent({
 
   const incrementar = (id: number) => {
     chooseProduct(
-      produto.map((productChoosen) => {
+      produtoSelecionado.map((productChoosen) => {
         if (productChoosen.produto_id === id) {
           return {
             ...productChoosen,
@@ -87,7 +87,7 @@ export default function ModalComponent({
   };
   const decrementar = (id: number) => {
     chooseProduct(
-      produto.map((productChoosen) => {
+      produtoSelecionado.map((productChoosen) => {
         if (productChoosen.produto_id === id && productChoosen.quantidade > 1) {
           return {
             ...productChoosen,
@@ -102,18 +102,15 @@ export default function ModalComponent({
   const closeModal = () => {
     setOpenModal(false);
   };
-  const registrarCliente = () => {
-    const nome: string | null = prompt("Digite seu nome para retirada:");
-    setNomeCliente(nome ?? "");
-  };
+  
   const deleteItem = (id: number) => {
     const confirmDelete: boolean = window.confirm(
       "Deseja realmente excluir o item?"
     );
     if (confirmDelete) {
-      chooseProduct(produto.filter((p) => p.produto_id !== id));
+      chooseProduct(produtoSelecionado.filter((p) => p.produto_id !== id));
     }
-    if (produto.length-1 === 0) {
+    if (produtoSelecionado.length-1 === 0) {
       closeModal();
     }
   };
@@ -133,7 +130,7 @@ export default function ModalComponent({
             ></IoClose>
           </div>
           <div className="modal-body">
-            {produto?.map((productChoosen) => {
+            {produtoSelecionado?.map((productChoosen) => {
               return (
                 <>
                   <ModalOrderContainer>
@@ -249,7 +246,7 @@ export default function ModalComponent({
           <div className="modal-footer">
             <ModalFooterContainer>
               <div className="orderDescrtipion">
-                {produto.map((productChoosen) => {
+                {produtoSelecionado.map((productChoosen) => {
                   return (
                     <div className="orderDescChild">
                       <Subtitle
@@ -287,7 +284,7 @@ export default function ModalComponent({
                 type="button"
                 className="btn btn-primary"
                 onClick={() => {
-                  registrarCliente();
+                 //TODO   tem que ver oq vai fazer aqui, vai adicionar o Order
                 }}
               >
                 Adicionar ao pedido

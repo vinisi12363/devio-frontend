@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { Produto } from '../types/Produto';
 
 interface ProductContextType {
-    produto: Produto[] | [];
+    produtoSelecionado: Produto[] | [];
     productChoosenList: Produto[] | [];
     chooseProduct: (product:Produto[]) => void;
 }
@@ -20,7 +20,7 @@ const ProductProvider: React.FC<ProductProviderProps> = ({ children }) => {
     };
 
     return (
-        <productContext.Provider value={{ produto: produto || [], productChoosenList: [], chooseProduct }}>
+        <productContext.Provider value={{ produtoSelecionado: produto || [], productChoosenList: [], chooseProduct }}>
             {children}
         </productContext.Provider>
     );

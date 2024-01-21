@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoCheckmark } from 'react-icons/io5';
 import { MainContainer } from '../../Components/MainContainer';
 import { PageBody } from '../../Components/MainContainer/Body';
@@ -23,10 +23,10 @@ import  ModalComponent  from '../../Components/OrderModal/index';
 export default function HomePage() {
   const [products, setProducts] = useState<Produto[]>([]);
   const { category } = useContextCategory();
-  const { produto, chooseProduct } = useContextProduct();
+  const { produtoSelecionado, chooseProduct } = useContextProduct();
   const [openModal, setOpenModal] = useState(false);
   const [disabledProducts, setDisabledProducts] = useState<number[]>([]);
-  console.log(produto ,'disableds ' ,disabledProducts );
+  
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -44,13 +44,13 @@ export default function HomePage() {
   useEffect(() => {
 
     function sincronizarArrays() {
-      const idsProdutos = produto.map((p) => p.produto_id);
+      const idsProdutos = produtoSelecionado.map((p) => p.produto_id);
       setDisabledProducts(idsProdutos);
     }
    
     sincronizarArrays();
     
-  }, [produto]);
+  }, [produtoSelecionado]);
   return (
     <>
       <MainContainer>
@@ -93,7 +93,7 @@ export default function HomePage() {
                     pointerEvents={isProductDisabled ? 'none' : 'auto'}
                     key={p.produto_id}
                     onClick={() => {
-                      const produtos = [...produto, p];
+                      const produtos = [...produtoSelecionado, p];
                       chooseProduct(produtos);
                       setOpenModal(true);
                       setDisabledProducts([...disabledProducts, p.produto_id]);
