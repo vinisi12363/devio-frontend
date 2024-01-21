@@ -8,21 +8,31 @@ import { FinalizeButton, CancelButton } from "./ButtonModal";
 import { Title } from "../Title";
 import { Subtitle } from "../Subtitle";
 import { ShowCardContainer } from "../../Components/ProductCard/Card";
-import Pizza from "../../assets/pizza1.png";
-import { useState } from "react";
+import PizzaPng from "../../assets/pizza1.png";
+import HamburguerPng from "../../assets/hamburguer.png";
+import RefrigerantePng from "../../assets/latinhas.png";
+import { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { IoAdd } from "react-icons/io5";
 import { IoRemove } from "react-icons/io5";
 import molho from "../../assets/molho.png";
 import mussarela from "../../assets/mussarela.png";
 import bacon from "../../assets/bacon.png";
+import { useContextProduct } from "../../Contexts/ProductContext";
 
-export default function ModalComponent() {
-  const [count, setCount] = useState(1);
-  const value:number = 35.0;
-  const prodName: string = "Pizza de Calabresa";
+export default function ModalComponent({
+  openModal,
+  setOpenModal,
+}: {
+  openModal: boolean;
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
+  const { produto , chooseProduct} = useContextProduct();
+  // const { order, fetchOrder } = useOrderContext();
+  const [nomeCliente, setNomeCliente] = useState("");
   const [valorAdicional, setValorAdicional] = useState(0);
-
+  const [valorTotal, setValorTotal] = useState(0);
+ 
   const adicionais = [
     {
       img: molho,
@@ -43,6 +53,14 @@ export default function ModalComponent() {
       valor: 4.0,
     },
   ];
+  
+  useEffect(() => {
+    setValorTotal(
+      produto.reduce((acc, curr) => {
+        return acc + curr.preco * curr.quantidade;
+      }, 0) + valorAdicional
+    );
+  },[produto]);
 
   const acrescentarAdicional = (valor: number) => {
     setValorAdicional(valorAdicional + valor);
@@ -54,134 +72,215 @@ export default function ModalComponent() {
     setValorAdicional(valorAdicional - valor);
   };
 
-  const incrementar = () => {
-    if (count + 1 >= 100) {
-      return;
-    }
-    setCount(count + 1);
+  const incrementar = (id:number) => {
+   
+    chooseProduct(produto.map((productChoosen) => {
+          if (productChoosen.produto_id === id) {
+            return {
+              ...productChoosen,
+              quantidade: productChoosen.quantidade + 1,
+            };
+          }
+          return productChoosen;
+        }
+          
+    ));
   };
-  const decrementar = () => {
-    if (count - 1 <= 0) {
-      return;
+  const decrementar = (id:number) => {
+    chooseProduct(produto.map((productChoosen) => {
+      if (productChoosen.produto_id === id && productChoosen.quantidade > 1) {
+        return {
+          ...productChoosen,
+          quantidade: productChoosen.quantidade - 1,
+        };
+      }
+      return productChoosen;
     }
-    setCount(count - 1);
+    ));
   };
+
+  const closeModal = () => {
+    setOpenModal(false);
+  };
+  const registrarCliente = () => {
+    const nome: string | null = prompt("Digite seu nome para retirada:");
+    setNomeCliente(nome ?? "");
+  };
+ 
   return (
-    <ModalContainer>
-      <ModalBody>
-        <div className="modal-header">
-          <Title text="Revise seu pedido!" textSize="40"></Title>
-          <IoClose size={60} style={{ color: 'grey' }}></IoClose>
-        </div>
-
-        <div className="modal-body">
-          <ModalOrderContainer>
-            <ShowCardContainer displayType="flex">
-              <img src={Pizza}></img>
-            </ShowCardContainer>
-            <div className="textOrderArea">
-              <Title text="Pizza" textSize="25"></Title>
-              <Subtitle
-                text="pizza de calabresa com queijo mussarela"
-                textSize="20"
-              ></Subtitle>
-              <div className="quantInputArea">
-                <button
-                  onClick={() => {
-                    decrementar();
-                  }}
-                >
-                  <IoRemove></IoRemove>
-                </button>
-
-                <Subtitle text={count.toString()} textSize="15"></Subtitle>
-
-                <button
-                  onClick={() => {
-                    incrementar();
-                  }}
-                >
-                  <IoAdd></IoAdd>
-                </button>
-              </div>
-            </div>
-
-            <Title text={`R$${value * count},00`} textSize="25"></Title>
-          </ModalOrderContainer>
-        </div>
-        <Title text="Adicionais" textSize="30"></Title>
-        <Subtitle
-          text="Selecione os ingredientes que você quer aidcionar a mais no seu lanche."
-          textSize="20"
-        ></Subtitle>
-        <div className="itemArea">
-          {adicionais.map((a) => {
-            return (
-              <>
-                <label className="item" key={a.nome}>
-                  <div className="imageContainer">
-                    <img src={a.img}></img>
-                  </div>
-
-                  <div className="itemInfo">
-                    <Title text={a.nome} textSize="22"></Title>
-                    <Subtitle text={a.descrição} textSize="20"></Subtitle>
-                  </div>
-                  <Title text={`R$${a.valor},00`} textSize="20"></Title>
-                  <input
-                    type="checkbox"
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      e.target.checked
-                        ? acrescentarAdicional(a.valor)
-                        : retirarAdicional(a.valor);
-                    }}
-                  />
-                </label>
-              </>
-            );
-          })}
-        </div>
-        <Title text="Observações" textSize="30"></Title>
-        <div className="inputObsContainer">
-          <input
-            className="obsInput"
-            type="text"
-            placeholder="Adicione uma observação ao pedido"
-          ></input>
-        </div>
-
-        <div className="modal-footer">
-          <ModalFooterContainer>
-            <div className="orderDescrtipion">
-              <Subtitle
-                text={`${count}x ${prodName} `}
-                textSize="25"
-              ></Subtitle>
-              <Subtitle text={`R$ ${value},00`} textSize="25"></Subtitle>
-            </div>
-            <div className="orderTotal">
-              <div className="totalTitle">
-                <Subtitle text="Total do pedido:" textSize="25"></Subtitle>
-                <div className="totalArea">
-                  <Title
-                    text={`R$${value * count + valorAdicional},00`}
-                    textSize="40"
-                  ></Title>
-                </div>
-              </div>
-            </div>
-          </ModalFooterContainer>
-
-          <div className="orderBtnContainer">
-            <CancelButton type="button" className="btn btn-default">
-              Continuar Comprando
-            </CancelButton>
-            <FinalizeButton type="button" className="btn btn-primary">
-              Adicionar ao pedido
-            </FinalizeButton>
+    openModal && (
+      <ModalContainer>
+        <ModalBody>
+          <div className="modal-header">
+            <Title text="Revise seu pedido!" textSize="40"></Title>
+            <IoClose
+              size={60}
+              style={{ color: "grey" }}
+              onClick={() => {
+                closeModal();
+              }}
+            ></IoClose>
           </div>
-        </div>
-      </ModalBody>
-    </ModalContainer>
+          <div className="modal-body">
+           
+              {produto?.map((productChoosen) => {
+                return (
+                  <>
+                     <ModalOrderContainer>
+                    <ShowCardContainer displayType="flex">
+                      <img
+                        src={
+                          productChoosen?.imagem === "RefrigerantePng"
+                            ? RefrigerantePng
+                            : productChoosen?.imagem === "PizzaPng"
+                            ? PizzaPng
+                            : productChoosen?.imagem === "HamburguerPng"
+                            ? HamburguerPng
+                            : ""
+                        }
+                        alt="Product Image"
+                      />
+                    </ShowCardContainer>
+                    <div className="textOrderArea">
+                      <Title text={productChoosen?.nome} textSize="25"></Title>
+                      <Subtitle
+                        text={productChoosen?.descricao}
+                        textSize="20"
+                      ></Subtitle>
+                      <div className="quantInputArea">
+                        <button
+                          onClick={() => {
+                            decrementar(productChoosen.produto_id);
+                          }}
+                        >
+                          <IoRemove></IoRemove>
+                        </button>
+
+                        <Subtitle
+                          text={productChoosen.quantidade.toString()}
+                          textSize="15"
+                        ></Subtitle>
+
+                        <button
+                          onClick={() => {
+                            incrementar(productChoosen.produto_id);
+                          }}
+                        >
+                          <IoAdd></IoAdd>
+                        </button>
+                      </div>
+                    </div>
+
+                    <Title
+                      text={`R$${((productChoosen?.preco ?? 0) * productChoosen.quantidade).toFixed(1)}0`}
+                      textSize="25"
+                    ></Title>
+                    </ModalOrderContainer>
+                  </>
+                );
+              })}
+           
+          </div>
+          <Title text="Adicionais" textSize="30"></Title>
+          <Subtitle
+            text="Selecione os ingredientes que você quer aidcionar a mais no seu lanche."
+            textSize="20"
+          ></Subtitle>
+          <div className="itemArea">
+            {adicionais.map((a) => {
+              return (
+                <>
+                  <label className="item" key={a.nome}>
+                    <div className="imageContainer">
+                      <img src={a.img}></img>
+                    </div>
+
+                    <div className="itemInfo">
+                      <Title text={a.nome} textSize="22"></Title>
+                      <Subtitle text={a.descrição} textSize="20"></Subtitle>
+                    </div>
+                    <Title text={`R$${a.valor},00`} textSize="20"></Title>
+                    <input
+                      type="checkbox"
+                      onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                        e.target.checked
+                          ? acrescentarAdicional(a.valor)
+                          : retirarAdicional(a.valor);
+                      }}
+                    />
+                  </label>
+                </>
+              );
+            })}
+          </div>
+
+          <Title text="Observações" textSize="30"></Title>
+          <div className="inputObsContainer">
+            <input
+              className="obsInput"
+              type="text"
+              placeholder="Adicione uma observação ao pedido"
+            ></input>
+          </div>
+
+          <div className="modal-footer">
+            <ModalFooterContainer>
+            <div className="orderDescrtipion">
+              {produto.map((productChoosen) => {
+                return (
+                  <div className="orderDescChild">
+                      <Subtitle
+                        text={`${productChoosen.quantidade}x ${productChoosen?.descricao} `}
+                        textSize="20"
+                      ></Subtitle>
+                      <Subtitle
+                        text={`R$ ${productChoosen?.preco * productChoosen.quantidade}`}
+                        textSize="20"
+                      ></Subtitle>
+                  </div>
+                );
+              })}
+                </div>
+                <div className="orderTotal">
+                      <div className="totalTitle">
+                        <Subtitle
+                          text="Total do pedido:"
+                          textSize="30"
+                        ></Subtitle>
+                        <div className="totalArea">
+                        
+                            
+                              <Title
+                              text={`R$${ 
+                                (valorTotal+valorAdicional).toFixed(1)
+                              }0`}
+                              textSize="40"
+                            ></Title>
+                            
+                       
+                         
+                        </div>
+                      </div>
+                    </div>
+            </ModalFooterContainer>
+
+            <div className="orderBtnContainer">
+              <CancelButton type="button" className="btn btn-default">
+                Continuar Comprando
+              </CancelButton>
+              <FinalizeButton
+                type="button"
+                className="btn btn-primary"
+                onClick={() => {
+                  registrarCliente();
+                }}
+              >
+                Adicionar ao pedido
+              </FinalizeButton>
+            </div>
+          </div>
+        </ModalBody>
+      </ModalContainer>
+    )
   );
 }

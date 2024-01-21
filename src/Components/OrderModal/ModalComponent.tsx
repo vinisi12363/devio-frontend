@@ -159,7 +159,9 @@ export const ModalOrderContainer = styled.div`
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-  
+    overflow-y: hidden;
+    border-bottom: 2px dashed #e0e0e0;
+
     img {
         width:240px;
         height: 240px;
@@ -191,7 +193,7 @@ export const ModalOrderContainer = styled.div`
 
 export const ModalFooterContainer = styled.div`
     width: 100%;
-    height: 25vh;
+    
     margin-top: 20px;
     background-color: white;
     border: 2px solid #e0e0e0;
@@ -199,15 +201,19 @@ export const ModalFooterContainer = styled.div`
     .orderDescrtipion{
         border-bottom: 2px dashed #e0e0e0;
         background-color: white;
-        height: 12.5vh;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
         padding: 0 2vw;
+        .orderDescChild{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
     }
     .orderTotal{
        background-color: white;
-       height: 12.5vh;
+      
        padding: 0 2vw;
     }
 `

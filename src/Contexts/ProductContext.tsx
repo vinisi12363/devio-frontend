@@ -2,9 +2,9 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { Produto } from '../types/Produto';
 
 interface ProductContextType {
-    productChoosen: Produto | null;
+    produto: Produto[] | [];
     productChoosenList: Produto[] | [];
-    chooseProduct: (product:Produto) => void;
+    chooseProduct: (product:Produto[]) => void;
 }
 interface ProductProviderProps {
     children: ReactNode;
@@ -13,14 +13,14 @@ interface ProductProviderProps {
 const productContext = createContext<ProductContextType | undefined>(undefined);
 
 const ProductProvider: React.FC<ProductProviderProps> = ({ children }) => {
-    const [produto, setProduto] = useState<Produto | null>();
+    const [produto, setProduto] = useState<Produto [] | [] >([]);
 
-    const chooseProduct = (product:Produto) => {
+    const chooseProduct = (product:Produto[]) => {
         setProduto(product);
     };
 
     return (
-        <productContext.Provider value={{ productChoosen: produto || null, chooseProduct , productChoosenList:[] }}>
+        <productContext.Provider value={{ produto: produto || [], productChoosenList: [], chooseProduct }}>
             {children}
         </productContext.Provider>
     );

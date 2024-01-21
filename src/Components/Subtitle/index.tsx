@@ -2,7 +2,7 @@ import { StyledP } from "./Title";
 
 
 export type TextType = { 
-    text: string
+    text: string | undefined
     textSize:string
 };	
 

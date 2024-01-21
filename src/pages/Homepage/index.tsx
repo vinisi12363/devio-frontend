@@ -15,22 +15,15 @@ import { Footer } from "../../Components/Footer";
 import { ProductsApi } from "../../Api/ProductsApi";
 import { useEffect, useState } from "react";
 import { useContextCategory } from "../../Contexts/CategoryContext";
+import { useContextProduct } from "../../Contexts/ProductContext";
 import ModalComponent from "../../Components/OrderModal";
-
-
-type Product = {
-    produto_id: number;
-    descricao: string;
-    preco: number;
-    codigo:string;
-    nome: string;
-    imagem: string;
-}
+import { Produto } from "../../types/Produto";
 
 export default function HomePage() {
   const [products, setProducts] = useState([]);
   const {category} = useContextCategory();
- 
+  const {produto, chooseProduct} = useContextProduct();
+  const [openModal, setOpenModal] = useState(false);
     useEffect(() => {
         const fetchProducts = async () => {
             try {
@@ -51,7 +44,7 @@ export default function HomePage() {
     <>
     
     <MainContainer>
-    <ModalComponent></ModalComponent>
+    <ModalComponent openModal={openModal} setOpenModal={setOpenModal}></ModalComponent>
       <PageBody>
       
         <Header></Header>
@@ -74,17 +67,25 @@ export default function HomePage() {
           </div>
           <div className="showCardsArea">
             {
-               products.map((p:Product) => {
+               products.map((p:Produto) => {
                 return(
                     
-                    <ShowCardContainer  displayType = {
+                    <ShowCardContainer  
+                       displayType = {
                         category === "HamburguerPng" && p.imagem === "HamburgerPng" ||  
                         category === "PizzaPng" && p.imagem === "PizzaPng" ||
                         category === "RefrigerantePng" && p.imagem === "RefrigerantePng" || 
                         !category ? "flex" : "none"  
-                        
+                       }
+                       key={p.produto_id}
+                       onClick={() => {
                        
-                    }key={p.produto_id}>
+                        const produtos = [...produto, p]
+                        chooseProduct(produtos);
+                        setOpenModal(true);
+                        //tem que colocar a parada de ficar verde aqui
+                       }}
+                      >
                       <div className="ProductImageArea">
                         <img src={
                             p.imagem === "HamburgerPng" ? HamburgerPng : '' ||
