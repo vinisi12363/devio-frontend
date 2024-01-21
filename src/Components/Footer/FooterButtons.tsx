@@ -12,7 +12,7 @@ export const FinalizeOrderButton = styled.button`
     cursor: pointer;
     position: relative;
     top: 3vw;    
-    left: 27vw;
+    left: 25vw;
     
 `
 
@@ -28,6 +28,6 @@ export const CancelOrderButton = styled.button`
     cursor: pointer;
     position: relative;
     top: 3vw;    
-    left: 17vw;
+    left: 12vw;
 
 `
