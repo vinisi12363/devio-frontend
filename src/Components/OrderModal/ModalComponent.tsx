@@ -25,6 +25,13 @@ export const ModalContainer = styled.div`
             transform: translateY(0%);
         }
     }
+    .deleteItem{
+         background-color: transparent;
+         width: 2vw;
+         position: relative;
+         left: 25vw;
+         bottom: 8vw;
+    }
    
 `
 
@@ -145,7 +152,6 @@ export const ModalBody = styled.div`
             align-items: center;
             padding: 0 1vw;
             box-sizing: border-box;
-            z-index: 0;
             cursor: pointer;
             outline: none;
            

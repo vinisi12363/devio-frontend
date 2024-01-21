@@ -12,7 +12,7 @@ export const HeaderInfo = styled.div`
     border-bottom: 1px solid #e0e0e0;
     position: fixed;
     top: 0;
-    z-index: 1;
+    z-index: 2;
     .pageLink{
         text-decoration: none;
     }

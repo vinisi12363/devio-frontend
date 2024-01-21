@@ -14,7 +14,7 @@ export const CardContainerArea = () => {
       <div onClick={()=>{chooseCategory("HamburguerPng")}}>
         <ProductCard href={HambuguerImg} ></ProductCard>
         <div className="productTitle">
-          <Title text="Hamburger" textSize={"25"}></Title>
+          <Title text="Hamburguer" textSize={"25"}></Title>
         </div>
       </div>
       <div onClick={()=>{chooseCategory("PizzaPng")}}>

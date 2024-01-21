@@ -27,12 +27,12 @@ export default function ModalComponent({
   openModal: boolean;
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const { produto , chooseProduct} = useContextProduct();
+  const { produto, chooseProduct } = useContextProduct();
   // const { order, fetchOrder } = useOrderContext();
   const [nomeCliente, setNomeCliente] = useState("");
   const [valorAdicional, setValorAdicional] = useState(0);
   const [valorTotal, setValorTotal] = useState(0);
- 
+
   const adicionais = [
     {
       img: molho,
@@ -53,14 +53,14 @@ export default function ModalComponent({
       valor: 4.0,
     },
   ];
-  
+
   useEffect(() => {
     setValorTotal(
       produto.reduce((acc, curr) => {
         return acc + curr.preco * curr.quantidade;
       }, 0) + valorAdicional
     );
-  },[produto]);
+  }, [produto]);
 
   const acrescentarAdicional = (valor: number) => {
     setValorAdicional(valorAdicional + valor);
@@ -72,31 +72,31 @@ export default function ModalComponent({
     setValorAdicional(valorAdicional - valor);
   };
 
-  const incrementar = (id:number) => {
-   
-    chooseProduct(produto.map((productChoosen) => {
-          if (productChoosen.produto_id === id) {
-            return {
-              ...productChoosen,
-              quantidade: productChoosen.quantidade + 1,
-            };
-          }
-          return productChoosen;
+  const incrementar = (id: number) => {
+    chooseProduct(
+      produto.map((productChoosen) => {
+        if (productChoosen.produto_id === id) {
+          return {
+            ...productChoosen,
+            quantidade: productChoosen.quantidade + 1,
+          };
         }
-          
-    ));
+        return productChoosen;
+      })
+    );
   };
-  const decrementar = (id:number) => {
-    chooseProduct(produto.map((productChoosen) => {
-      if (productChoosen.produto_id === id && productChoosen.quantidade > 1) {
-        return {
-          ...productChoosen,
-          quantidade: productChoosen.quantidade - 1,
-        };
-      }
-      return productChoosen;
-    }
-    ));
+  const decrementar = (id: number) => {
+    chooseProduct(
+      produto.map((productChoosen) => {
+        if (productChoosen.produto_id === id && productChoosen.quantidade > 1) {
+          return {
+            ...productChoosen,
+            quantidade: productChoosen.quantidade - 1,
+          };
+        }
+        return productChoosen;
+      })
+    );
   };
 
   const closeModal = () => {
@@ -106,7 +106,18 @@ export default function ModalComponent({
     const nome: string | null = prompt("Digite seu nome para retirada:");
     setNomeCliente(nome ?? "");
   };
- 
+  const deleteItem = (id: number) => {
+    const confirmDelete: boolean = window.confirm(
+      "Deseja realmente excluir o item?"
+    );
+    if (confirmDelete) {
+      chooseProduct(produto.filter((p) => p.produto_id !== id));
+    }
+    if (produto.length-1 === 0) {
+      closeModal();
+    }
+  };
+
   return (
     openModal && (
       <ModalContainer>
@@ -122,12 +133,11 @@ export default function ModalComponent({
             ></IoClose>
           </div>
           <div className="modal-body">
-           
-              {produto?.map((productChoosen) => {
-                return (
-                  <>
-                     <ModalOrderContainer>
-                    <ShowCardContainer displayType="flex">
+            {produto?.map((productChoosen) => {
+              return (
+                <>
+                  <ModalOrderContainer>
+                    <ShowCardContainer displayType="flex" pointerEvents="auto">
                       <img
                         src={
                           productChoosen?.imagem === "RefrigerantePng"
@@ -169,17 +179,27 @@ export default function ModalComponent({
                           <IoAdd></IoAdd>
                         </button>
                       </div>
+                      <div className="deleteItem">
+                        <IoClose
+                          size={30}
+                          style={{ color: "red" }}
+                          onClick={() => {
+                            deleteItem(productChoosen.produto_id);
+                          }}
+                        />
+                      </div>
                     </div>
 
                     <Title
-                      text={`R$${((productChoosen?.preco ?? 0) * productChoosen.quantidade).toFixed(1)}0`}
+                      text={`R$${(
+                        (productChoosen?.preco ?? 0) * productChoosen.quantidade
+                      ).toFixed(1)}0`}
                       textSize="25"
                     ></Title>
-                    </ModalOrderContainer>
-                  </>
-                );
-              })}
-           
+                  </ModalOrderContainer>
+                </>
+              );
+            })}
           </div>
           <Title text="Adicionais" textSize="30"></Title>
           <Subtitle
@@ -199,7 +219,10 @@ export default function ModalComponent({
                       <Title text={a.nome} textSize="22"></Title>
                       <Subtitle text={a.descrição} textSize="20"></Subtitle>
                     </div>
-                    <Title text={`R$${a.valor},00`} textSize="20"></Title>
+                    <Title
+                      text={`R$${a.valor.toFixed(2)}`}
+                      textSize="20"
+                    ></Title>
                     <input
                       type="checkbox"
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -225,47 +248,39 @@ export default function ModalComponent({
 
           <div className="modal-footer">
             <ModalFooterContainer>
-            <div className="orderDescrtipion">
-              {produto.map((productChoosen) => {
-                return (
-                  <div className="orderDescChild">
+              <div className="orderDescrtipion">
+                {produto.map((productChoosen) => {
+                  return (
+                    <div className="orderDescChild">
                       <Subtitle
                         text={`${productChoosen.quantidade}x ${productChoosen?.descricao} `}
                         textSize="20"
                       ></Subtitle>
                       <Subtitle
-                        text={`R$ ${productChoosen?.preco * productChoosen.quantidade}`}
+                        text={`R$ ${(
+                          productChoosen?.preco * productChoosen.quantidade
+                        ).toFixed(1)}0`}
                         textSize="20"
                       ></Subtitle>
-                  </div>
-                );
-              })}
-                </div>
-                <div className="orderTotal">
-                      <div className="totalTitle">
-                        <Subtitle
-                          text="Total do pedido:"
-                          textSize="30"
-                        ></Subtitle>
-                        <div className="totalArea">
-                        
-                            
-                              <Title
-                              text={`R$${ 
-                                (valorTotal+valorAdicional).toFixed(1)
-                              }0`}
-                              textSize="40"
-                            ></Title>
-                            
-                       
-                         
-                        </div>
-                      </div>
                     </div>
+                  );
+                })}
+              </div>
+              <div className="orderTotal">
+                <div className="totalTitle">
+                  <Subtitle text="Total do pedido:" textSize="30"></Subtitle>
+                  <div className="totalArea">
+                    <Title
+                      text={`R$${(valorTotal + valorAdicional).toFixed(1)}0`}
+                      textSize="40"
+                    ></Title>
+                  </div>
+                </div>
+              </div>
             </ModalFooterContainer>
 
             <div className="orderBtnContainer">
-              <CancelButton type="button" className="btn btn-default">
+              <CancelButton type="button" className="btn btn-default" onClick={()=>{closeModal()}}>
                 Continuar Comprando
               </CancelButton>
               <FinalizeButton
