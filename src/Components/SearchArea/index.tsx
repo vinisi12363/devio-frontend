@@ -3,14 +3,13 @@ import { CiSearch } from "react-icons/ci";
 import { useState } from "react";
 
 interface SearchAreaProps {
-    searchProduct: string;
+ 
     setSearchProduct: (searchTerm: string) => void;
 }
 
-export const SearchArea: React.FC<SearchAreaProps> = ({searchProduct , setSearchProduct}) => {
+export const SearchArea: React.FC<SearchAreaProps> = ({  setSearchProduct}) => {
     const [searchTerm, setSearchTerm] = useState<string>('');
-    console.log(searchProduct);
-
+   
     const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setSearchProduct(searchTerm);

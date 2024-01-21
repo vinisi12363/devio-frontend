@@ -9,7 +9,7 @@ interface OrderProviderProps {
 
 interface orderContextType {
   order: Order | null;
-  fetchOrder: (orderData:Order) => void;
+  createOrder: (orderData:Order) => void;
 }
 
 
@@ -19,19 +19,19 @@ const orderContext = createContext<orderContextType | undefined>(undefined);
 const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
   const [order, setOrder] = useState<Order | null>(null);
 
-  const fetchOrder = (orderData: Order) => {
+  const createOrder = (orderData: Order) => {
     setOrder(orderData);
   };
 
   return (
-    <orderContext.Provider value={{ order, fetchOrder, }}>
+    <orderContext.Provider value={{ order, createOrder, }}>
       {children}
     </orderContext.Provider>
   );
 };
 
 
-const useOrderContext = (): orderContextType => {
+const useContextOrder = (): orderContextType => {
   const context = useContext(orderContext);
 
   if (!context) {
@@ -41,4 +41,4 @@ const useOrderContext = (): orderContextType => {
   return context;
 };
 
-export { OrderProvider, useOrderContext };
+export { OrderProvider, useContextOrder };

@@ -18,6 +18,7 @@ import { ProductsApi } from '../../Api/ProductsApi';
 import { Produto } from '../../types/Produto';
 import { useContextCategory } from '../../Contexts/CategoryContext';
 import { useContextProduct } from '../../Contexts/ProductContext';
+import {useContextOrder} from '../../Contexts/OrderContext';
 import  ModalComponent  from '../../Components/OrderModal/index';
 
 export default function HomePage() {
@@ -27,20 +28,37 @@ export default function HomePage() {
   const [openModal, setOpenModal] = useState(false);
   const [disabledProducts, setDisabledProducts] = useState<number[]>([]);
   const [searchProduct, setSearchProduct] = useState('' as string);
-  
+  const {order} = useContextOrder();
+  console.log("PEDIDO",order);
+
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const result = await ProductsApi.getAllProducts();
-        if (result) setProducts(result);
+        if (result){
+          setProducts(result);
+      
+        } 
       } catch (error) {
         console.log(error);
       }
     };
- 
-    fetchProducts();
-   
-  
+    
+    const filterProducts = () => {
+      const filteredProducts = products.filter((p) => {
+        return p.nome.toLowerCase().includes(searchProduct.toLowerCase());
+      });
+      setProducts(filteredProducts);
+    }
+
+
+    if (searchProduct) {
+      filterProducts();
+    } else {
+      fetchProducts();
+    }
+
   }, []);
   useEffect(() => {
 
@@ -58,8 +76,8 @@ export default function HomePage() {
         <ModalComponent openModal={openModal} setOpenModal={setOpenModal}></ModalComponent>
         <PageBody>
           <Header />
-          <SearchArea searchProduct = {searchProduct}  setSearchProduct = {setSearchProduct}/>
-
+          <SearchArea setSearchProduct = {setSearchProduct}/>
+          
           <CategoriesSection>
             <Title text={'Categorias'} textSize="30" />
             <Subtitle textSize="20" text={'Navegue por categoria'} />
@@ -81,13 +99,15 @@ export default function HomePage() {
                 return (
                   <ShowCardContainer 
                     displayType={
-                      category === 'HamburguerPng' && p.imagem === 'HamburguerPng'
+                        (p.nome.toLocaleLowerCase() === searchProduct.toLocaleLowerCase() || p.codigo === searchProduct.toLocaleUpperCase()) 
+                         ? 'flex'
+                         : category === 'HamburguerPng' && p.imagem === 'HamburguerPng'
                         ? 'flex'
                         : category === 'PizzaPng' && p.imagem === 'PizzaPng'
                         ? 'flex'
                         : category === 'RefrigerantePng' && p.imagem === 'RefrigerantePng'
                         ? 'flex'
-                        : !category
+                        : !category   
                         ? 'flex'
                         : 'none'
                     }

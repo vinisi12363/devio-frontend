@@ -19,6 +19,7 @@ import molho from "../../assets/molho.png";
 import mussarela from "../../assets/mussarela.png";
 import bacon from "../../assets/bacon.png";
 import { useContextProduct } from "../../Contexts/ProductContext";
+import { useContextOrder } from "../../Contexts/OrderContext";
 
 export default function ModalComponent({
   openModal,
@@ -28,11 +29,10 @@ export default function ModalComponent({
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const { produtoSelecionado, chooseProduct } = useContextProduct();
-  // const { order, fetchOrder } = useOrderContext();
-
-  const [valorAdicional, setValorAdicional] = useState(0);
-  const [valorTotal, setValorTotal] = useState(0);
-
+  const { order, createOrder } = useContextOrder();
+  const [valorAdicional, setValorAdicional] = useState<number>(0);
+  const [valorTotal, setValorTotal] = useState<number>(0);
+  const [obs,setObs] = useState<string>('');
   const adicionais = [
     {
       img: molho,
@@ -240,6 +240,10 @@ export default function ModalComponent({
               className="obsInput"
               type="text"
               placeholder="Adicione uma observação ao pedido"
+              value={obs}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setObs(e.target.value);
+              }}
             ></input>
           </div>
 
@@ -284,7 +288,17 @@ export default function ModalComponent({
                 type="button"
                 className="btn btn-primary"
                 onClick={() => {
-                 //TODO   tem que ver oq vai fazer aqui, vai adicionar o Order
+                  createOrder({
+                    ...order,
+                      total: valorTotal + valorAdicional,
+                      products: [...produtoSelecionado],
+                      observacao: obs,
+                      nomeCliente: "",
+                      numeroPedido:0,
+                      status:null
+                  });
+                  chooseProduct([]);
+                  closeModal();
                 }}
               >
                 Adicionar ao pedido
