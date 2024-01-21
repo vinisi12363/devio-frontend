@@ -1,5 +1,5 @@
-// Exemplo de arquivo AppContext.tsx
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { Order } from '../types/Order';
 
 
 
@@ -8,8 +8,8 @@ interface OrderProviderProps {
 }
 
 interface orderContextType {
-  order: string | null;
-  fetchorder: (orderData:string) => void;
+  order: Order | null;
+  fetchOrder: (orderData:Order) => void;
 }
 
 
@@ -17,20 +17,20 @@ const orderContext = createContext<orderContextType | undefined>(undefined);
 
 
 const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
-  const [order, setorder] = useState<string | null>(null);
+  const [order, setOrder] = useState<Order | null>(null);
 
-  const fetchorder = (orderData: string) => {
-    setorder(orderData);
+  const fetchOrder = (orderData: Order) => {
+    setOrder(orderData);
   };
 
   return (
-    <orderContext.Provider value={{ order, fetchorder, }}>
+    <orderContext.Provider value={{ order, fetchOrder, }}>
       {children}
     </orderContext.Provider>
   );
 };
 
-// Criar um hook personalizado para consumir o contexto
+
 const useOrderContext = (): orderContextType => {
   const context = useContext(orderContext);
 
