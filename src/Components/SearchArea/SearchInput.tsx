@@ -11,12 +11,19 @@ export const InputContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 2vw;
+   
     box-sizing: border-box;
     border-bottom: 1px solid #e0e0e0;
     margin-top: 0vh;
     position: relative;
     top:30px;
+    .styledForm{
+        background-color: trnasparent;
+        padding: 0 1vw;
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
 `
 
 export const Input = styled.input`

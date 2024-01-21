@@ -26,6 +26,7 @@ export default function HomePage() {
   const { produtoSelecionado, chooseProduct } = useContextProduct();
   const [openModal, setOpenModal] = useState(false);
   const [disabledProducts, setDisabledProducts] = useState<number[]>([]);
+  const [searchProduct, setSearchProduct] = useState('' as string);
   
   useEffect(() => {
     const fetchProducts = async () => {
@@ -57,7 +58,7 @@ export default function HomePage() {
         <ModalComponent openModal={openModal} setOpenModal={setOpenModal}></ModalComponent>
         <PageBody>
           <Header />
-          <SearchArea />
+          <SearchArea searchProduct = {searchProduct}  setSearchProduct = {setSearchProduct}/>
 
           <CategoriesSection>
             <Title text={'Categorias'} textSize="30" />
