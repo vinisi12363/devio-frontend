@@ -4,7 +4,7 @@ import { Produto } from "./Produto";
 export type Order = {
     total: number;
     products: Produto[];
-    metodoPagamento: "dinheiro" | "cartao" | "pix"| null ;
+    metodoPagamento: "dinheiro" | "cartão" | "pix"| null ;
     troco: number;
     observacao: string | null;
     nomeCliente: string;

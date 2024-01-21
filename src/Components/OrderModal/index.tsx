@@ -20,6 +20,7 @@ import mussarela from "../../assets/mussarela.png";
 import bacon from "../../assets/bacon.png";
 import { useContextProduct } from "../../Contexts/ProductContext";
 import { useContextOrder } from "../../Contexts/OrderContext";
+import { toast } from "react-toastify";
 
 export default function ModalComponent({
   openModal,
@@ -288,15 +289,20 @@ export default function ModalComponent({
                 type="button"
                 className="btn btn-primary"
                 onClick={() => {
-                  createOrder({
-                    ...order,
-                      total: valorTotal + valorAdicional,
-                      products: [...produtoSelecionado],
-                      observacao: obs,
-                      nomeCliente: "",
-                      numeroPedido:0,
-                      status:null
-                  });
+                  
+                  const data = {
+                    total: valorTotal + valorAdicional,
+                    products: [...produtoSelecionado],
+                    observacao: obs,
+                    nomeCliente: "",
+                    numeroPedido:0,
+                    status:null,
+                    metodoPagamento:null,
+                    troco:0
+                  } 
+                  const newOrder = order ? [...order, data] : [data];
+                  toast.success("Pedido adicionado! vá para a finalização");
+                  createOrder(newOrder);
                   chooseProduct([]);
                   closeModal();
                 }}

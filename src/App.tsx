@@ -6,12 +6,14 @@ import TakeOutPage from "./pages/TakeoutPage";
 import { CategoryProvider } from "./Contexts/CategoryContext";
 import { ProductProvider } from "./Contexts/ProductContext";
 import { OrderProvider } from "./Contexts/OrderContext";
+
 function App() {
   return (
+    <>
+    <ToastContainer/>
     <OrderProvider>
     <ProductProvider>
     <CategoryProvider>
-      <ToastContainer/>
       <BrowserRouter>
         <Routes>
           <Route path="/" Component={HomePage}></Route>
@@ -22,6 +24,8 @@ function App() {
     </CategoryProvider>
     </ProductProvider>
     </OrderProvider>
+    </>
+  
   )
 }
 export default App;

@@ -8,8 +8,8 @@ interface OrderProviderProps {
 }
 
 interface orderContextType {
-  order: Order | null;
-  createOrder: (orderData:Order) => void;
+  order: Order [] | null;
+  createOrder: (orderData:Order []) => void;
 }
 
 
@@ -17,14 +17,14 @@ const orderContext = createContext<orderContextType | undefined>(undefined);
 
 
 const OrderProvider: React.FC<OrderProviderProps> = ({ children }) => {
-  const [order, setOrder] = useState<Order | null>(null);
+  const [order, setOrder] = useState<Order[] | [] >([]);
 
-  const createOrder = (orderData: Order) => {
+  const createOrder = (orderData: Order []) => {
     setOrder(orderData);
   };
 
   return (
-    <orderContext.Provider value={{ order, createOrder, }}>
+    <orderContext.Provider value={{ order, createOrder }}>
       {children}
     </orderContext.Provider>
   );

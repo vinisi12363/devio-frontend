@@ -18,8 +18,8 @@ import { ProductsApi } from '../../Api/ProductsApi';
 import { Produto } from '../../types/Produto';
 import { useContextCategory } from '../../Contexts/CategoryContext';
 import { useContextProduct } from '../../Contexts/ProductContext';
-import {useContextOrder} from '../../Contexts/OrderContext';
 import  ModalComponent  from '../../Components/OrderModal/index';
+import { ClientModal } from '../../Components/ClientModal';
 
 export default function HomePage() {
   const [products, setProducts] = useState<Produto[]>([]);
@@ -28,9 +28,8 @@ export default function HomePage() {
   const [openModal, setOpenModal] = useState(false);
   const [disabledProducts, setDisabledProducts] = useState<number[]>([]);
   const [searchProduct, setSearchProduct] = useState('' as string);
-  const {order} = useContextOrder();
-  console.log("PEDIDO",order);
-
+  const [openClientModal ,setOpenClientModal] = useState(false);
+ 
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -74,6 +73,7 @@ export default function HomePage() {
     <>
       <MainContainer>
         <ModalComponent openModal={openModal} setOpenModal={setOpenModal}></ModalComponent>
+        <ClientModal openClientModal = {openClientModal} setOpenClientModal = {setOpenClientModal}></ClientModal>
         <PageBody>
           <Header />
           <SearchArea setSearchProduct = {setSearchProduct}/>
@@ -149,7 +149,7 @@ export default function HomePage() {
               })}
             </div>
           </ProductsAreaContainer>
-          <Footer />
+          <Footer setOpenClientModal={setOpenClientModal} />
         </PageBody>
       </MainContainer>
     </>
