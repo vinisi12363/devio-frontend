@@ -25,6 +25,10 @@ async function getOrderByStatus(status: string) {
   const { data } = await ApiConnection.get(`/orders/${status}`);
   return data;
 }
+async function updateOrderById(id: number , status:string) {
+    const { data } = await ApiConnection.put(`/orders/${id}/${status}`);
+    return data;
+}
 
 export const ordersApi = {
   getAllOrders,
@@ -32,4 +36,5 @@ export const ordersApi = {
   deleteOrderById,
   deleteOrderByStatus,
   getOrderByStatus,
+  updateOrderById
 };

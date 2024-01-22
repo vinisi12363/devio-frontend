@@ -6,11 +6,13 @@ import TakeOutPage from "./pages/TakeoutPage";
 import { CategoryProvider } from "./Contexts/CategoryContext";
 import { ProductProvider } from "./Contexts/ProductContext";
 import { OrderProvider } from "./Contexts/OrderContext";
+import { DatabaseOrderProvider } from "./Contexts/DatabaseOrdersContext";
 
 function App() {
   return (
     <>
       <ToastContainer />
+      <DatabaseOrderProvider>
       <OrderProvider>
         <ProductProvider>
           <CategoryProvider>
@@ -24,6 +26,7 @@ function App() {
           </CategoryProvider>
         </ProductProvider>
       </OrderProvider>
+      </DatabaseOrderProvider>
     </>
   );
 }
