@@ -33,7 +33,7 @@ export const ClientModal: React.FC<ClientModalProps> = ({
           formaPagamento !== "cartão") ||
         (formaPagamento === "dinheiro" && troco === "")
       ) {
-        alert("Preencha o campo de troco");
+        toast.warn("Preencha o campo de troco");
         setTroco("");
         setFormaPagamento("");
       } else {
@@ -47,6 +47,9 @@ export const ClientModal: React.FC<ClientModalProps> = ({
             const result = await ordersApi.postOrder(order[0]);
             if (result) {
               toast.success("Pedido realizado com sucesso!");
+              setTroco("");
+              setFormaPagamento("");
+              setNomeCliente("");
               setOpenClientModal(false);
             }
           } catch (error) {

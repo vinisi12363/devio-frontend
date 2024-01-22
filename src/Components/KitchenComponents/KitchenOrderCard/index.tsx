@@ -14,6 +14,8 @@ import RefrigerantePng from "../../../assets/latinhas.png";
 import { ordersApi } from "../../../Api/OrdersApi";
 import { Subtitle } from "../../Subtitle";
 import { toast } from "react-toastify";
+import { UseCapitalizeFirstLetter } from "../../../Hooks/useCapitalize";
+
 
 type kitchenProps= {
   statusType: "preparando" |  "pronto";
@@ -43,26 +45,27 @@ export default function KitchenOrderCard( {statusType} : React.PropsWithChildren
       const result = window.confirm("O pedido Foi retirado?");
       if (result) {
         try {
-          await ordersApi.updateOrderById(id, "concluído");
-          toast.success("Pedido devolvido com sucesso");
+          await ordersApi.updateOrderById(id, "entregue");
+          toast.success("Pedido entregue com sucesso!");
           setTimeout(() => {
             window.location.reload();
           }, 3000);
         
         } catch (error) {
           console.log(error);
+          toast.error("Erro ao processar solicitação tente novamente mais tarde");
         }
       }
 
     }
   };
   const finalizeOrder = async (id: number) => {
-    if(statusType === "preparando"){
+    
       const result = window.confirm("Deseja concluir o pedido?");
       if (result) {
         try {
           await ordersApi.updateOrderById(id , "pronto" );
-          toast.success("Pedido finalizado com sucesso");
+          toast.success("Pedido enviado para retirada!");
           setTimeout(() => {
             window.location.reload();
           }, 3000);
@@ -71,23 +74,13 @@ export default function KitchenOrderCard( {statusType} : React.PropsWithChildren
           console.log(error);
         }
       }
-    } else {
-      const result = window.confirm("Deseja marcar o produto como entregue?");
-      if (result) {
-        try {
-          await ordersApi.updateOrderById(id, "concluído");
-          toast.success("Pedido aguardando retirada");
-          setTimeout(() => {
-            window.location.reload();
-          }, 3000);
-        
-        } catch (error) {
-          console.log(error);
-        }
-      }
-    }
+    
    
   };
+   const capitalize =  (str:string) => {
+     const result = UseCapitalizeFirstLetter(str);
+     return result;
+   }
 
   return (
     <>
@@ -123,7 +116,7 @@ export default function KitchenOrderCard( {statusType} : React.PropsWithChildren
                 })}
                 <TextArea>
                   <div className="nameArea">
-                   <h3>{`${order.numeropedido} - ${order.nomecliente}`}</h3>
+                   <h3>{`${order.numeropedido} - ${capitalize(order.nomecliente)}`}</h3>
                   </div>
               
                 </TextArea>

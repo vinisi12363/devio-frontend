@@ -28,6 +28,7 @@ async function getOrderByStatus(status: string) {
 async function updateOrderById(id: number , status:string) {
     const { data } = await ApiConnection.put(`/orders/${id}/${status}`);
     return data;
+ 
 }
 
 export const ordersApi = {

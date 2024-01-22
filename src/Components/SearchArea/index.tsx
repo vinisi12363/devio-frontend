@@ -1,6 +1,7 @@
 import { InputContainer, Input, InputButton } from "./SearchInput";
 import { CiSearch } from "react-icons/ci";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 interface SearchAreaProps {
   setSearchProduct: (searchTerm: string) => void;
@@ -13,6 +14,7 @@ export const SearchArea: React.FC<SearchAreaProps> = ({ setSearchProduct }) => {
     event.preventDefault();
     setSearchProduct(searchTerm);
     setSearchTerm("");
+    toast.warn("A Pesquisa está  em manutenção!");
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

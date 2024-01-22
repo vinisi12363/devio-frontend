@@ -41,7 +41,7 @@ export default function HomePage() {
         console.log(error);
       }
     };
-
+  
     const filterProducts = () => {
       const filteredProducts = products.filter((p) => {
         return p.nome.toLowerCase().includes(searchProduct.toLowerCase());
@@ -63,6 +63,9 @@ export default function HomePage() {
 
     sincronizarArrays();
   }, [produtoSelecionado]);
+
+
+  
   return (
     <>
       <MainContainer>
