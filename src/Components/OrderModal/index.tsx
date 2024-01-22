@@ -33,7 +33,7 @@ export default function ModalComponent({
   const { order, createOrder } = useContextOrder();
   const [valorAdicional, setValorAdicional] = useState<number>(0);
   const [valorTotal, setValorTotal] = useState<number>(0);
-  const [obs,setObs] = useState<string>('');
+  const [obs, setObs] = useState<string>("");
   const adicionais = [
     {
       img: molho,
@@ -59,7 +59,7 @@ export default function ModalComponent({
     setValorTotal(
       produtoSelecionado.reduce((acc, curr) => {
         return acc + curr.preco * curr.quantidade;
-      }, 0) + valorAdicional
+      }, 0) + valorAdicional,
     );
   }, [produtoSelecionado, valorAdicional]);
 
@@ -83,7 +83,7 @@ export default function ModalComponent({
           };
         }
         return productChoosen;
-      })
+      }),
     );
   };
   const decrementar = (id: number) => {
@@ -96,22 +96,22 @@ export default function ModalComponent({
           };
         }
         return productChoosen;
-      })
+      }),
     );
   };
 
   const closeModal = () => {
     setOpenModal(false);
   };
-  
+
   const deleteItem = (id: number) => {
     const confirmDelete: boolean = window.confirm(
-      "Deseja realmente excluir o item?"
+      "Deseja realmente excluir o item?",
     );
     if (confirmDelete) {
       chooseProduct(produtoSelecionado.filter((p) => p.produto_id !== id));
     }
-    if (produtoSelecionado.length-1 === 0) {
+    if (produtoSelecionado.length - 1 === 0) {
       closeModal();
     }
   };
@@ -141,10 +141,10 @@ export default function ModalComponent({
                           productChoosen?.imagem === "RefrigerantePng"
                             ? RefrigerantePng
                             : productChoosen?.imagem === "PizzaPng"
-                            ? PizzaPng
-                            : productChoosen?.imagem === "HamburguerPng"
-                            ? HamburguerPng
-                            : ""
+                              ? PizzaPng
+                              : productChoosen?.imagem === "HamburguerPng"
+                                ? HamburguerPng
+                                : ""
                         }
                         alt="Product Image"
                       />
@@ -282,24 +282,29 @@ export default function ModalComponent({
             </ModalFooterContainer>
 
             <div className="orderBtnContainer">
-              <CancelButton type="button" className="btn btn-default" onClick={()=>{closeModal()}}>
+              <CancelButton
+                type="button"
+                className="btn btn-default"
+                onClick={() => {
+                  closeModal();
+                }}
+              >
                 Continuar Comprando
               </CancelButton>
               <FinalizeButton
                 type="button"
                 className="btn btn-primary"
                 onClick={() => {
-                  
                   const data = {
                     total: valorTotal + valorAdicional,
                     products: [...produtoSelecionado],
                     observacao: obs,
                     nomeCliente: "",
-                    numeroPedido:0,
-                    status:null,
-                    metodoPagamento:null,
-                    troco:0
-                  } 
+                    numeroPedido: 0,
+                    status: null,
+                    metodoPagamento: null,
+                    troco: 0,
+                  };
                   const newOrder = order ? [...order, data] : [data];
                   toast.success("Pedido adicionado! vá para a finalização");
                   createOrder(newOrder);

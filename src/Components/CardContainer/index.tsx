@@ -7,22 +7,34 @@ import PizzaImg from "../../assets/pizza1.png";
 import { useContextCategory } from "../../Contexts/CategoryContext";
 
 export const CardContainerArea = () => {
-  const {chooseCategory} = useContextCategory();
+  const { chooseCategory } = useContextCategory();
 
   return (
     <CardContainer>
-      <div onClick={()=>{chooseCategory("HamburguerPng")}}>
-        <ProductCard href={HambuguerImg} ></ProductCard>
+      <div
+        onClick={() => {
+          chooseCategory("HamburguerPng");
+        }}
+      >
+        <ProductCard href={HambuguerImg}></ProductCard>
         <div className="productTitle">
           <Title text="Hamburguer" textSize={"25"}></Title>
         </div>
       </div>
-      <div onClick={()=>{chooseCategory("PizzaPng")}}>
+      <div
+        onClick={() => {
+          chooseCategory("PizzaPng");
+        }}
+      >
         <ProductCard href={PizzaImg}></ProductCard>
         <Title text="Pizza" textSize={"25"}></Title>
       </div>
 
-      <div onClick={()=>{chooseCategory("RefrigerantePng")}}>
+      <div
+        onClick={() => {
+          chooseCategory("RefrigerantePng");
+        }}
+      >
         <ProductCard href={RefrigeranteImg}></ProductCard>
         <Title text="Refrigerante" textSize={"25"}></Title>
       </div>

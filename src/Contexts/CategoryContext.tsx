@@ -1,40 +1,41 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface categoryContextType {
-    category: string | null;
-    chooseCategory: (category:string) => void;
+  category: string | null;
+  chooseCategory: (category: string) => void;
 }
 interface CategoryProviderProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
-const categoryContext = createContext<categoryContextType | undefined>(undefined);
+const categoryContext = createContext<categoryContextType | undefined>(
+  undefined,
+);
 
 const CategoryProvider: React.FC<CategoryProviderProps> = ({ children }) => {
-    const [category, setCategory] = useState<string | null>();
+  const [category, setCategory] = useState<string | null>();
 
-    const chooseCategory = (category:string) => {
-        setCategory(category);
-    };
+  const chooseCategory = (category: string) => {
+    setCategory(category);
+  };
 
-    return (
-        <categoryContext.Provider value={{ category: category || null, chooseCategory }}>
-            {children}
-        </categoryContext.Provider>
-    );
-
-
-}
+  return (
+    <categoryContext.Provider
+      value={{ category: category || null, chooseCategory }}
+    >
+      {children}
+    </categoryContext.Provider>
+  );
+};
 
 const useContextCategory = (): categoryContextType => {
-    const context = useContext(categoryContext);
+  const context = useContext(categoryContext);
 
-    if (!context) {
-        throw new Error('useContextCategory must be used within an AppProvider');
-    }
+  if (!context) {
+    throw new Error("useContextCategory must be used within an AppProvider");
+  }
 
-    return context;
-}
+  return context;
+};
 
 export { CategoryProvider, useContextCategory };

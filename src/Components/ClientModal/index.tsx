@@ -2,10 +2,10 @@ import { ModalContainer } from "../OrderModal/ModalComponent";
 import { FinalizeButton, CancelButton } from "../OrderModal/ButtonModal";
 import { Title } from "../Title";
 import { Container } from "./ClientModal";
-import {  useState } from "react";
+import { useState } from "react";
 import { useContextOrder } from "../../Contexts/OrderContext";
 import { toast } from "react-toastify";
-
+import { ordersApi } from "../../Api/OrdersApi";
 
 type ClientModalProps = {
   openClientModal: boolean;
@@ -20,30 +20,45 @@ export const ClientModal: React.FC<ClientModalProps> = ({
   const [nomeCliente, setNomeCliente] = useState<string>("");
   const [formaPagamento, setFormaPagamento] = useState<string>("");
   const [troco, setTroco] = useState<string>("");
-   
-   
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        finalizarPedido();
 
-    }
-    const finalizarPedido = () => {
-            if(nomeCliente && formaPagamento){
-                if ((formaPagamento !== "dinheiro" && formaPagamento !== "pix" && formaPagamento !== "cartão") || (formaPagamento === "dinheiro" && troco === "")) {
-                    alert("Preencha o campo de troco");
-                    setTroco("");
-                    setFormaPagamento("");
-                }else{
-                    if (order) {
-                        order[0].nomeCliente = nomeCliente,
-                        order[0].metodoPagamento = formaPagamento,
-                        order[0].troco = Number(troco);
-                      }
-                    toast.success("Pedido realizado com sucesso!");
-                    setOpenClientModal(false);
-                }
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    finalizarPedido();
+  };
+  const finalizarPedido = async () => {
+    if (nomeCliente && formaPagamento) {
+      if (
+        (formaPagamento !== "dinheiro" &&
+          formaPagamento !== "pix" &&
+          formaPagamento !== "cartão") ||
+        (formaPagamento === "dinheiro" && troco === "")
+      ) {
+        alert("Preencha o campo de troco");
+        setTroco("");
+        setFormaPagamento("");
+      } else {
+        if (order) {
+          (order[0].nomeCliente = nomeCliente),
+            (order[0].metodoPagamento = formaPagamento),
+            (order[0].troco = Number(troco)),
+            (order[0].status = "preparando");
+
+          try {
+            const result = await ordersApi.postOrder(order[0]);
+            if (result) {
+              toast.success("Pedido realizado com sucesso!");
+              setOpenClientModal(false);
+            }
+          } catch (error) {
+            console.log(error);
+            toast.error("Erro ao realizar pedido!");
+          }
         }
+
+        setOpenClientModal(false);
+      }
     }
+  };
 
   return (
     openClientModal && (
@@ -51,7 +66,11 @@ export const ClientModal: React.FC<ClientModalProps> = ({
         <Container>
           <div className="body">
             <Title text="Informações do cliente" textSize="25"></Title>
-            <form onSubmit={(e)=>{handleSubmit(e)}}>
+            <form
+              onSubmit={(e) => {
+                handleSubmit(e);
+              }}
+            >
               <Title text="Nome para Retirada" textSize="20"></Title>
               <input
                 placeholder="Nome do cliente"
@@ -95,11 +114,7 @@ export const ClientModal: React.FC<ClientModalProps> = ({
                 >
                   Cancelar
                 </CancelButton>
-                <FinalizeButton
-                  className="formButton"
-                  type="submit"
-                  
-                >
+                <FinalizeButton className="formButton" type="submit">
                   Finalizar
                 </FinalizeButton>
               </div>

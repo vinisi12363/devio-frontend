@@ -1,14 +1,9 @@
 import { MainBody } from "./Body";
 
 type MainContainerProps = {
-    children: React.ReactNode;
+  children: React.ReactNode;
 };
-  
-export const MainContainer: React.FC<MainContainerProps> = ({ children }) => {
 
-    return(
-        <MainBody>
-           {children}
-        </MainBody>
-    );
-}
+export const MainContainer: React.FC<MainContainerProps> = ({ children }) => {
+  return <MainBody>{children}</MainBody>;
+};

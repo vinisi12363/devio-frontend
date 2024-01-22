@@ -1,41 +1,45 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { Produto } from '../types/Produto';
+import React, { createContext, useContext, useState, ReactNode } from "react";
+import { Produto } from "../types/Produto";
 
 interface ProductContextType {
-    produtoSelecionado: Produto[] | [];
-    productChoosenList: Produto[] | [];
-    chooseProduct: (product:Produto[]) => void;
+  produtoSelecionado: Produto[] | [];
+  productChoosenList: Produto[] | [];
+  chooseProduct: (product: Produto[]) => void;
 }
 interface ProductProviderProps {
-    children: ReactNode;
+  children: ReactNode;
 }
 
 const productContext = createContext<ProductContextType | undefined>(undefined);
 
 const ProductProvider: React.FC<ProductProviderProps> = ({ children }) => {
-    const [produto, setProduto] = useState<Produto [] | [] >([]);
+  const [produto, setProduto] = useState<Produto[] | []>([]);
 
-    const chooseProduct = (product:Produto[]) => {
-        setProduto(product);
-    };
+  const chooseProduct = (product: Produto[]) => {
+    setProduto(product);
+  };
 
-    return (
-        <productContext.Provider value={{ produtoSelecionado: produto || [], productChoosenList: [], chooseProduct }}>
-            {children}
-        </productContext.Provider>
-    );
+  return (
+    <productContext.Provider
+      value={{
+        produtoSelecionado: produto || [],
+        productChoosenList: [],
+        chooseProduct,
+      }}
+    >
+      {children}
+    </productContext.Provider>
+  );
+};
 
+const useContextProduct = (): ProductContextType => {
+  const context = useContext(productContext);
 
-}
+  if (!context) {
+    throw new Error("useContextCategory must be used within an AppProvider");
+  }
 
-const useContextProduct= (): ProductContextType => {
-    const context = useContext(productContext);
-
-    if (!context) {
-        throw new Error('useContextCategory must be used within an AppProvider');
-    }
-
-    return context;
-}
+  return context;
+};
 
 export { ProductProvider, useContextProduct };
