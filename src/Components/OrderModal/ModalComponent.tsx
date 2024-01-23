@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+type ModalProps = {
+  modalIsOpen: boolean;
+}
+
 export const ModalContainer = styled.div`
   width: 100%;
   height: 100vh;
@@ -30,6 +34,15 @@ export const ModalContainer = styled.div`
     position: relative;
     left: 25vw;
     bottom: 8vw;
+  }
+  @media (max-width: 768px) {
+    .deleteItem {
+      background-color: transparent;
+      width: 2vw;
+      position: relative;
+      left: 33dvh;
+      bottom: 12dvh;
+    }
   }
 `;
 
@@ -83,6 +96,8 @@ export const ModalBody = styled.div`
     flex-direction: column;
     justify-content: space-between;
     background-color: white;
+    
+    
     padding-top: 20px;
     margin-top: 40px;
 
@@ -150,8 +165,91 @@ export const ModalBody = styled.div`
       outline: none;
     }
   }
+  @media (max-width: 768px) {
+    width: 50dvh;
+    height: 90dvh;
+    
+  .obsInput {
+    width: 100%;
+    min-height: 10dvh;
+    
+    input{
+      box-sizing: border-box; 
+      overflow-wrap: break-word;
+    }
+    border: none;
+    outline: none;
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+    background-color: transparent;
+    &::placeholder {
+      color: #999;
+    }
+  }
+  .itemArea {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: white;
+    
+    
+    padding-top: 20px;
+    margin-top: 40px;
+
+    .item {
+      background-color: white;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+      flex-direction: row;
+
+
+      input[type="checkbox"] {
+        -moz-appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 2px solid #555;
+        cursor: pointer;
+      }
+     
+     
+      .imageContainer {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px #00000080;
+        border: 1px solid #00000080;
+        position: relative;
+        right: 1vw;
+        top: 0px;
+        img {
+          width: 120px;
+          height: 120px;
+          iobject-fit: cover;
+        }
+      }
+    }
+    .itemInfo {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      right: 0vw;
+      top: 0px;
+      background-color: white;
+      h3{
+        font-size: 8px;
+      }
+      p{font-size: 20px;}
+    }
+  }
+  }
 `;
-export const ModalOrderContainer = styled.div`
+export const ModalOrderContainer = styled.div<ModalProps>`
   background-color: white;
   width: 100%;
   display: flex;
@@ -160,7 +258,9 @@ export const ModalOrderContainer = styled.div`
   align-items: center;
   overflow-y: hidden;
   border-bottom: 2px dashed #e0e0e0;
-
+  .cardMobile{
+    display:${props=>props.modalIsOpen ? "none" : "flex"};
+  }
   img {
     width: 240px;
     height: 240px;
@@ -188,6 +288,34 @@ export const ModalOrderContainer = styled.div`
       z-index: 1;
     }
   }
+  }
+  @media (max-width: 768px) {
+    .textOrderArea{
+      background-color: white;
+      
+    }
+    .quantInputArea {
+      background-color: white;
+      border-radius: 30px;
+      border: 2px solid green;
+      overflow: hidden;
+      min-width: 15dvh;
+      min-heitgh: 5vw;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      button {
+        background-color: green;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 2rem;
+        color: white;
+        font-weight: 700;
+        font-family: "Roboto", sans-serif;
+        z-index: 1;
+      }
+    }
 `;
 
 export const ModalFooterContainer = styled.div`

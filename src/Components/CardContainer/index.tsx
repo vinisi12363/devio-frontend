@@ -11,7 +11,7 @@ export const CardContainerArea = () => {
 
   return (
     <CardContainer>
-      <div
+      <div className="productCardContainer"
         onClick={() => {
           chooseCategory("HamburguerPng");
         }}
@@ -27,7 +27,10 @@ export const CardContainerArea = () => {
         }}
       >
         <ProductCard href={PizzaImg}></ProductCard>
-        <Title text="Pizza" textSize={"25"}></Title>
+        <div className="productTitle">
+          <Title text="Pizza" textSize={"25"}></Title>
+        </div>
+       
       </div>
 
       <div
@@ -36,7 +39,10 @@ export const CardContainerArea = () => {
         }}
       >
         <ProductCard href={RefrigeranteImg}></ProductCard>
+        <div className="productTitle">
         <Title text="Refrigerante" textSize={"25"}></Title>
+        </div>
+        
       </div>
     </CardContainer>
   );

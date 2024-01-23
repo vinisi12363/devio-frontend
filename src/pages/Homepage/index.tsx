@@ -29,8 +29,10 @@ export default function HomePage() {
   const [disabledProducts, setDisabledProducts] = useState<number[]>([]);
   const [searchProduct, setSearchProduct] = useState("" as string);
   const [openClientModal, setOpenClientModal] = useState(false);
-
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  console.log(windowWidth);
   useEffect(() => {
+  
     const fetchProducts = async () => {
       try {
         const result = await ProductsApi.getAllProducts();
@@ -54,7 +56,16 @@ export default function HomePage() {
     } else {
       fetchProducts();
     }
+   
   }, []);
+
+  useEffect(() => {
+    const refreshWindowWidth = () => {
+      setWindowWidth(window.innerWidth);
+    }
+    refreshWindowWidth();
+  }, []);
+  
   useEffect(() => {
     function sincronizarArrays() {
       const idsProdutos = produtoSelecionado.map((p) => p.produto_id);
@@ -103,7 +114,8 @@ export default function HomePage() {
 
                 return (
                   <ShowCardContainer
-                    displayType={
+
+                  displayType={
                       p.nome.toLocaleLowerCase() ===
                         searchProduct.toLocaleLowerCase() ||
                       p.codigo === searchProduct.toLocaleUpperCase()
@@ -119,7 +131,9 @@ export default function HomePage() {
                               : !category
                                 ? "flex"
                                 : "none"
+                      
                     }
+                    color = {isProductDisabled && windowWidth < 768 ? "green" : "Crimson"}
                     pointerEvents={isProductDisabled ? "none" : "auto"}
                     key={p.produto_id}
                     onClick={() => {
@@ -129,7 +143,7 @@ export default function HomePage() {
                       setDisabledProducts([...disabledProducts, p.produto_id]);
                     }}
                   >
-                    {isProductDisabled && (
+                    {isProductDisabled && windowWidth > 768 && (
                       <div className="verde">
                         <IoCheckmark size={80} style={{ color: "white" }} />
                       </div>

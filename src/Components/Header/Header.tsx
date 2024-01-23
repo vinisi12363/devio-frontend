@@ -15,11 +15,21 @@ export const HeaderInfo = styled.div`
   z-index: 2;
   .pageLink {
     text-decoration: none;
+    background-color: transparent;
+  }
+  @media(max-width: 768px) {
+    background-color: #990000;
+    min-width: 100%;
+    height: 10dvh;
+    p{
+      font-size: 0.5rem;
+      color: black;
+    }
   }
 `;
 export const HeaderLogo = styled.div`
   width: 10vw;
-  height: 100%;
+  height: auto;
   background-color: transparent;
   cursor: pointer;
   display: flex;
@@ -31,6 +41,16 @@ export const HeaderLogo = styled.div`
     font-weight: 700;
     color: #fff;
     cursor: pointer;
+  }
+  @media(max-width: 415px) {
+    max-width: 11dvh;
+    background-color: blue;
+    height: auto;
+    p{
+      font-size: 0.5rem;
+      color: black;
+    }
+  
   }
 `;
 
@@ -51,6 +71,16 @@ export const HeaderOptionContainer = styled.div`
       transform: scale(1.1);
       border-radius: 10px;
       background-color: red;
+    }
+  }
+  @media(max-width: 768px) {
+    background-color: #990000;
+    display: flex;
+    flex-direction: column;
+    p{
+      font-size: 1rem;
+      color: white;
+      font-weight: 700;
     }
   }
 `;

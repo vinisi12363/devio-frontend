@@ -13,6 +13,11 @@ export const FinalizeOrderButton = styled.button`
   position: relative;
   top: 3vw;
   left: 25vw;
+  @media (max-width: 768px) {
+    position: relative;
+  top: 0vw;
+  left:0vw;
+  }
 `;
 
 export const CancelOrderButton = styled.button`
@@ -28,4 +33,9 @@ export const CancelOrderButton = styled.button`
   position: relative;
   top: 3vw;
   left: 12vw;
+  @media (max-width: 768px) {
+    position: relative;
+  top: 0vw;
+  left:0vw;
+  }
 `;

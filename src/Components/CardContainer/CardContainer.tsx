@@ -15,4 +15,41 @@ export const CardContainer = styled.div`
     flex-direction: column;
     align-items: center;
   }
+  @media (max-width: 768px) {
+ 
+    width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: 6dvh;
+    background-color: white;
+    justify-content: space-around;; 
+    ,productTitle{
+      display: none;
+    }  
+    div{
+      background-color: white;
+      box-shadow: none;
+      max-width: 30%;
+      border-radius: 50%;
+      justify-content: center;
+      align-items: center;
+      img{
+        max-width:10dvh;
+        max-height: 10dvh;
+        object-fit: contain;
+      }
+      h2{
+        display: none;
+        font-size: 1rem;
+      }
+    }
+    .productCardContainer{
+      background-color white;
+      height: auto;
+      
+      .productTitle{
+        display: none;
+      }
+    } 
+  }
 `;

@@ -8,6 +8,10 @@ export const MainBody = styled.div`
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+  @media (max-width: 768px) {
+    max-width: 100%;
+    background-color: green;
+  }
 `;
 export const PageBody = styled.div`
   width: 80%;
@@ -18,4 +22,8 @@ export const PageBody = styled.div`
   align-items: center;
   box-sizing: border-box;
   margin-top: 10vh;
+  @media (max-width: 768px) {
+    min-width: 100%;
+    background-color: white;
+  }
 `;

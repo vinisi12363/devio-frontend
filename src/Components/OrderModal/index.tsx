@@ -34,35 +34,37 @@ export default function ModalComponent({
   const [valorAdicional, setValorAdicional] = useState<number>(0);
   const [valorTotal, setValorTotal] = useState<number>(0);
   const [obs, setObs] = useState<string>("");
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const adicionais = [
     {
       img: molho,
       nome: "Molho especial",
       descrição: " 90gr de Molho especial da casa",
-      valor: 3.0,
+      valor: 3,
     },
     {
       img: mussarela,
       nome: "Queijo Mussarela",
       descrição: " 135gr de Mussarela da melhor qualidade",
-      valor: 2.0,
+      valor: 2,
     },
     {
       img: bacon,
       nome: "Bacon Grelhado",
       descrição: " 100gr de Bacon da melhor qualidade",
-      valor: 4.0,
+      valor: 4,
     },
   ];
 
   useEffect(() => {
-    setValorTotal(
-      produtoSelecionado.reduce((acc, curr) => {
-        return acc + curr.preco * curr.quantidade;
-      }, 0) + valorAdicional,
-    );
+    const totalProdutos = produtoSelecionado.reduce((valorTotal, produto) => {
+      console.log(`Produto: ${produto.nome}, Preço: ${produto.preco}, Quantidade: ${produto.quantidade}`);
+      return valorTotal + (produto.preco * produto.quantidade);
+    }, 0);
+    const totalFinal = totalProdutos + valorAdicional;
+    setValorTotal(totalFinal);
   }, [produtoSelecionado, valorAdicional]);
-
+  
   const acrescentarAdicional = (valor: number) => {
     setValorAdicional(valorAdicional + valor);
   };
@@ -123,7 +125,7 @@ export default function ModalComponent({
           <div className="modal-header">
             <Title text="Revise seu pedido!" textSize="40"></Title>
             <IoClose
-              size={60}
+              size={windowWidth>768 ? 60 : 30}
               style={{ color: "grey" }}
               onClick={() => {
                 closeModal();
@@ -134,23 +136,26 @@ export default function ModalComponent({
             {produtoSelecionado?.map((productChoosen) => {
               return (
                 <>
-                  <ModalOrderContainer>
-                    <ShowCardContainer displayType="flex" pointerEvents="auto">
-                      <img
-                        src={
-                          productChoosen?.imagem === "RefrigerantePng"
-                            ? RefrigerantePng
-                            : productChoosen?.imagem === "PizzaPng"
-                              ? PizzaPng
-                              : productChoosen?.imagem === "HamburguerPng"
-                                ? HamburguerPng
-                                : ""
-                        }
-                        alt="Product Image"
-                      />
-                    </ShowCardContainer>
+                  <ModalOrderContainer modalIsOpen={openModal}>
+                    <div className="cardMobile">
+                      <ShowCardContainer displayType="flex" pointerEvents="auto" color={"Crimson"}>
+                        <img
+                          src={
+                            productChoosen?.imagem === "RefrigerantePng"
+                              ? RefrigerantePng
+                              : productChoosen?.imagem === "PizzaPng"
+                                ? PizzaPng
+                                : productChoosen?.imagem === "HamburguerPng"
+                                  ? HamburguerPng
+                                  : ""
+                          }
+                          alt="Product Image"
+                        />
+                      </ShowCardContainer>
+                    </div>
+                    
                     <div className="textOrderArea">
-                      <Title text={productChoosen?.nome} textSize="25"></Title>
+                      <Title text={productChoosen?.nome} textSize={windowWidth >= 768 ? "25" : "18"}></Title>
                       <Subtitle
                         text={productChoosen?.descricao}
                         textSize="20"
@@ -201,7 +206,7 @@ export default function ModalComponent({
           </div>
           <Title text="Adicionais" textSize="30"></Title>
           <Subtitle
-            text="Selecione os ingredientes que você quer aidcionar a mais no seu lanche."
+            text="Selecione os ingredientes que você quer adicionar a mais no seu lanche."
             textSize="20"
           ></Subtitle>
           <div className="itemArea">
@@ -209,12 +214,13 @@ export default function ModalComponent({
               return (
                 <>
                   <label className="item" key={a.nome}>
+                    
                     <div className="imageContainer">
                       <img src={a.img}></img>
                     </div>
-
+                    
                     <div className="itemInfo">
-                      <Title text={a.nome} textSize="22"></Title>
+                      <Title text={a.nome} textSize={windowWidth >= 768 ? "22" : "20"}></Title>
                       <Subtitle text={a.descrição} textSize="20"></Subtitle>
                     </div>
                     <Title
@@ -273,7 +279,7 @@ export default function ModalComponent({
                   <Subtitle text="Total do pedido:" textSize="30"></Subtitle>
                   <div className="totalArea">
                     <Title
-                      text={`R$${(valorTotal + valorAdicional).toFixed(1)}0`}
+                      text={`R$${(valorTotal).toFixed(1)}0`}
                       textSize="40"
                     ></Title>
                   </div>
@@ -296,7 +302,7 @@ export default function ModalComponent({
                 className="btn btn-primary"
                 onClick={() => {
                   const data = {
-                    total: valorTotal + valorAdicional,
+                    total: valorTotal,
                     products: [...produtoSelecionado],
                     observacao: obs,
                     nomeCliente: "",

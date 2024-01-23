@@ -24,6 +24,18 @@ export const InputContainer = styled.div`
     align-items: center;
     width: 100%;
   }
+  @media (max-width: 768px) {
+    width: 80%;
+    max-height: 6dvh;
+    background-color: white;
+    color: #333;
+    
+    font-size: 1rem;
+    input{
+      font-size: 1.2rem;
+      height: auto;
+    }
+  }
 `;
 
 export const Input = styled.input`
@@ -53,4 +65,8 @@ export const InputButton = styled.button`
   transition: 0.3s;
   position: relative;
   top: 5px;
+  @media (max-width: 768px) {
+    position: relative;
+    right: 4dvh;
+  }
 `;

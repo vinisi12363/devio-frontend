@@ -6,7 +6,7 @@ export default function Header() {
     <HeaderInfo>
       <HeaderLogo>
         <Link className="pageLink" to={"/"}>
-          <p>VINI FAST FOOD</p>
+          <p className="pMedia">VINI FAST FOOD</p>
         </Link>
       </HeaderLogo>
       <HeaderOptionContainer>
