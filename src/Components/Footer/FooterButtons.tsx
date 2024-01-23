@@ -16,22 +16,23 @@ export const FooterContainer = styled.div`
 `
 export const FinalizeOrderButton = styled.button`
   width: 400px;
-  height: 35px;
-  background-color: lightgrey;
-  border: 1px solid #e0e0e0;
+  min-height: 45px;
+  background-color: #9F9F9F;
+  border: 2px solid #9F9F9F;
   border-radius: 15px;
   align-items: center;
   justify-content: center;
-
+  color: white;
   cursor: pointer;
   position: relative;
   top: 3vw;
-  left: 25vw;
+  left: 46vw;
   @media (max-width: 768px) {
+    min-width: 21dvh;
     min-height: 5dvh;
     position: relative;
     top: 0.5dvh;
-    left:6dvh;
+    left:4dvh;
     max-width: 40%;
     background-color: Crimson;
     h2{
@@ -43,17 +44,22 @@ export const FinalizeOrderButton = styled.button`
 
 export const CancelOrderButton = styled.button`
   width: 400px;
-  height: 35px;
-  background-color: lightgrey;
-  border: 1px solid #e0e0e0;
+  min-height: 45px;
+  background-color: white;
+  border: 2px solid #9F9F9F;
+  color: #9F9F9F;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
   border-radius: 15px;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   position: relative;
   top: 3vw;
-  left: 12vw;
+  left: 35vw;
   @media (max-width: 768px) {
+   min-width: 21dvh;
     min-height: 5dvh;
     text-align: center;
     position: relative;
