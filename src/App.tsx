@@ -7,10 +7,11 @@ import { CategoryProvider } from "./Contexts/CategoryContext";
 import { ProductProvider } from "./Contexts/ProductContext";
 import { OrderProvider } from "./Contexts/OrderContext";
 import { DatabaseOrderProvider } from "./Contexts/DatabaseOrdersContext";
+import { WindowWidthProvider } from "./Contexts/windowSizeContext";
 
 function App() {
   return (
-    <>
+    <WindowWidthProvider>
       <ToastContainer />
       <DatabaseOrderProvider>
       <OrderProvider>
@@ -27,7 +28,7 @@ function App() {
         </ProductProvider>
       </OrderProvider>
       </DatabaseOrderProvider>
-    </>
+    </WindowWidthProvider>
   );
 }
 export default App;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const HeaderInfo = styled.div`
   width: 90%;
   height: 10vh;
-  background-color: #990000;
+  background-color: Crimson;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,7 +18,7 @@ export const HeaderInfo = styled.div`
     background-color: transparent;
   }
   @media(max-width: 768px) {
-    background-color: #990000;
+    background-color: Crimson;
     min-width: 100%;
     height: 10dvh;
     p{
@@ -74,9 +74,12 @@ export const HeaderOptionContainer = styled.div`
     }
   }
   @media(max-width: 768px) {
-    background-color: #990000;
+    background-color:  Crimson;
+    width: 80%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-around;
+
     p{
       font-size: 1rem;
       color: white;

@@ -49,6 +49,7 @@ export const ProductsBody = styled.div`
   }
 
   @media (max-width: 768px) {
+   
    .ProductImageArea{
     background-color:  white ;
     height: auto;

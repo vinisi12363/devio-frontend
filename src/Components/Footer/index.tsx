@@ -2,6 +2,7 @@ import { FinalizeOrderButton, CancelOrderButton } from "./FooterButtons";
 import { Title } from "../Title";
 import { useContextOrder } from "../../Contexts/OrderContext";
 import { toast } from "react-toastify";
+import{FooterContainer} from './FooterButtons'
 
 type FooterProps = {
   setOpenClientModal: (open: boolean) => void;
@@ -27,7 +28,7 @@ export const Footer: React.FC<FooterProps> = ({ setOpenClientModal }) => {
     }
   };
   return (
-    <footer>
+    <FooterContainer>
       <CancelOrderButton
         onClick={() => {
           confirmCancel();
@@ -42,6 +43,6 @@ export const Footer: React.FC<FooterProps> = ({ setOpenClientModal }) => {
       >
         <Title text="Finalizar" textSize="30"></Title>
       </FinalizeOrderButton>
-    </footer>
+    </FooterContainer>
   );
 };

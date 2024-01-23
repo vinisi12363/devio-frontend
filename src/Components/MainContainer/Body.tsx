@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const MainBody = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100dvh;
   background-color: white;
   display: flex;
@@ -9,12 +9,13 @@ export const MainBody = styled.div`
   align-items: center;
   box-sizing: border-box;
   @media (max-width: 768px) {
-    max-width: 100%;
-    background-color: green;
+    min-width: 100%;
+  
+    background-color: red;
   }
 `;
 export const PageBody = styled.div`
-  width: 80%;
+  width: 90%;
   height: 100dvh;
   background-color: white;
   display: flex;
@@ -24,6 +25,8 @@ export const PageBody = styled.div`
   margin-top: 10vh;
   @media (max-width: 768px) {
     min-width: 100%;
-    background-color: white;
+    height: auto;
+    background-color: red;
+    margin-top: 7.4dvh;
   }
 `;

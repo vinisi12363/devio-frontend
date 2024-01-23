@@ -78,8 +78,8 @@ export const ShowCardContainer = styled.div<styledCardProps>`
   }
   .verde {
     background-color: green;
-    min-width: 18dvh;
-    min-height: 25dvh;
+    min-width: 250px;
+    min-height: 37dvh;
     z-index: 1;
     position: absolute;
     padding: 10px;
@@ -114,7 +114,23 @@ export const ShowCardContainer = styled.div<styledCardProps>`
     p{
       font-size: 1rem;
     }
-
+    .verde {
+      background-color: green;
+      min-width: 18dvh;
+      min-height: 25dvh;
+      z-index: 1;
+      position: absolute;
+      padding: 10px;
+     
+      opacity: 0.8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+    }
+    &:hover .verde {
+      transform: scale(1.2);
+    }
     
   }
 `;

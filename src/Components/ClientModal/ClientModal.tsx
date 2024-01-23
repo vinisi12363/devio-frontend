@@ -10,6 +10,7 @@ export const Container = styled.div`
   box-sizing: border-box;
   padding: 10px;
   overflow-y: auto;
+  border-radius: 10px;
   .title {
     width: 100%;
     height: 10vh;
@@ -35,13 +36,16 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     box-sizing: border-box;
-    padding: 10px;
+    
     overflow-y: auto;
+   
     form {
       background-color: white;
       width: 80%;
-      margin-bottom: 25px;
-      padding: 10px;
+      min-height: 40dvh;
+      margin-top: 25px;
+      margin-bottom: 10px;
+      
       display: flex;
       flex-direction: column;
       justify-content: space-between;

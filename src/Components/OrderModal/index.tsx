@@ -21,6 +21,7 @@ import bacon from "../../assets/bacon.png";
 import { useContextProduct } from "../../Contexts/ProductContext";
 import { useContextOrder } from "../../Contexts/OrderContext";
 import { toast } from "react-toastify";
+import { useContextWindowWidth } from "../../Contexts/windowSizeContext";
 
 export default function ModalComponent({
   openModal,
@@ -34,7 +35,7 @@ export default function ModalComponent({
   const [valorAdicional, setValorAdicional] = useState<number>(0);
   const [valorTotal, setValorTotal] = useState<number>(0);
   const [obs, setObs] = useState<string>("");
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const {windowWidth } = useContextWindowWidth();
   const adicionais = [
     {
       img: molho,

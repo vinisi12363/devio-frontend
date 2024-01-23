@@ -68,7 +68,7 @@ export const ClientModal: React.FC<ClientModalProps> = ({
       <ModalContainer>
         <Container>
           <div className="body">
-            <Title text="Informações do cliente" textSize="25"></Title>
+           
             <form
               onSubmit={(e) => {
                 handleSubmit(e);

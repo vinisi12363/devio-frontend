@@ -11,6 +11,7 @@ import KitchenOrderCard from "../../Components/KitchenComponents/KitchenOrderCar
 import { useContextDatabaseOrder } from "../../Contexts/DatabaseOrdersContext";
 import { ordersApi } from "../../Api/OrdersApi";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 export default function KitchenPage() {
   const { fetchDatabaseOrder } = useContextDatabaseOrder();
@@ -20,8 +21,10 @@ export default function KitchenPage() {
         const result = await ordersApi.getAllOrders();
         if (result) {
           fetchDatabaseOrder(result);
-          
+        }else{
+          toast.info("Ainda não existe nenhum pedido!");
         }
+
       } catch (error) {
         console.log(error);
       }

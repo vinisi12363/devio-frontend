@@ -20,6 +20,7 @@ import { useContextCategory } from "../../Contexts/CategoryContext";
 import { useContextProduct } from "../../Contexts/ProductContext";
 import ModalComponent from "../../Components/OrderModal/index";
 import { ClientModal } from "../../Components/ClientModal";
+import { useContextWindowWidth } from "../../Contexts/windowSizeContext";
 
 export default function HomePage() {
   const [products, setProducts] = useState<Produto[]>([]);
@@ -29,8 +30,19 @@ export default function HomePage() {
   const [disabledProducts, setDisabledProducts] = useState<number[]>([]);
   const [searchProduct, setSearchProduct] = useState("" as string);
   const [openClientModal, setOpenClientModal] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const {windowWidth , refreshWindowWidth} = useContextWindowWidth();
   console.log(windowWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      refreshWindowWidth(window.innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   useEffect(() => {
   
     const fetchProducts = async () => {
@@ -59,13 +71,6 @@ export default function HomePage() {
    
   }, []);
 
-  useEffect(() => {
-    const refreshWindowWidth = () => {
-      setWindowWidth(window.innerWidth);
-    }
-    refreshWindowWidth();
-  }, []);
-  
   useEffect(() => {
     function sincronizarArrays() {
       const idsProdutos = produtoSelecionado.map((p) => p.produto_id);
