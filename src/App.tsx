@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import HomePage from "./pages/HomePage";
-import KitchenPage from "./pages/KitchenPage";
-import TakeOutPage from "./pages/TakeoutPage";
+import HomePage from "./pages/HomePage/index";
+import KitchenPage from "./pages/KitchenPage/index";
+import TakeOutPage from "./pages/TakeoutPage/index";
 import { CategoryProvider } from "./Contexts/CategoryContext";
 import { ProductProvider } from "./Contexts/ProductContext";
 import { OrderProvider } from "./Contexts/OrderContext";
