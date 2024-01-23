@@ -11,7 +11,7 @@ export const MainBody = styled.div`
   @media (max-width: 768px) {
     min-width: 100%;
   
-    background-color: white;
+    background-color: blue;
   }
 `;
 export const PageBody = styled.div`
@@ -26,7 +26,7 @@ export const PageBody = styled.div`
   @media (max-width: 768px) {
     min-width: 100%;
     height: auto;
-    background-color: white;
+    background-color: blue;
     margin-top: 7.4dvh;
   }
 `;

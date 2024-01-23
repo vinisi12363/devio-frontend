@@ -1,14 +1,11 @@
 import { ProductsBody } from "./ProductsBody";
 
 type ProductAreaProps = {
-    children: React.ReactNode;
+  children: React.ReactNode;
 };
-  
-export const ProductsAreaContainer: React.FC<ProductAreaProps> = ({ children }) => {
 
-    return(
-        <ProductsBody>
-           {children}
-        </ProductsBody>
-    );
-}
+export const ProductsAreaContainer: React.FC<ProductAreaProps> = ({
+  children,
+}) => {
+  return <ProductsBody>{children}</ProductsBody>;
+};

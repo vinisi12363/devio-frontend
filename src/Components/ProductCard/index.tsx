@@ -1,15 +1,13 @@
 import { CardContainer } from "./Card";
 
 type CardProps = {
-   href: string;
+  href: string;
 };
 
-
-export const ProductCard = (img:CardProps) => {
-    return(
-        <CardContainer>
-            <img src={img.href}></img>
-        </CardContainer>
-    );
-}
-
+export const ProductCard = (img: CardProps) => {
+  return (
+    <CardContainer>
+      <img src={img.href}></img>
+    </CardContainer>
+  );
+};

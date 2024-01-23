@@ -1,12 +1,12 @@
 import { Produto } from "./Produto";
 
-export type Order = {
+export type OrderDatabase = {
   total: number;
   products: Produto[];
-  metodoPagamento: "dinheiro" | "cartão" | "pix" | null;
+  metodopagamento: "dinheiro" | "cartão" | "pix" | null;
   troco: number;
   observacao: string | null;
-  nomeCliente: string;
-  numeroPedido: number;
+  nomecliente: string;
+  numeropedido: number;
   status: "preparando" | "pronto" | "entregue" | "cancelado" | null;
 };
