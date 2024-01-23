@@ -1,12 +1,9 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react-swc'
+import react from "@vitejs/plugin-react";
+import { UserConfig } from "vite";
 
-export default defineConfig({
-  base:'/',
+const config: UserConfig = {
   plugins: [react()],
-  resolve: {
-    alias: {
-      '@emotion/styled': '@emotion/styled/base',
-    },
-  },
-});
+
+};
+
+export default config;
