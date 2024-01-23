@@ -12,11 +12,11 @@ Faça seu pedido de forma rápida e com visualização em TEMPO REAL do que est�
 <br>
 
 
-[![banner.png](./public/banner.png)](https://devio-frontend-git-devlopment-vinisi12363.vercel.app/)
+[![banner.png](./public/banner.png)](https://devio-frontend-8tjq.vercel.app/)
 
 <div align="center">
 
-[[Acesse o aplicativo online]](https://devio-frontend-git-devlopment-vinisi12363.vercel.app/)
+[[Acesse o aplicativo online]](https://devio-frontend-8tjq.vercel.app/)
 
 </div>
 
