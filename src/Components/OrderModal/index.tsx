@@ -36,7 +36,7 @@ export default function ModalComponent({
   const [valorTotal, setValorTotal] = useState<number>(0);
   const [obs, setObs] = useState<string>("");
   const {windowWidth } = useContextWindowWidth();
-  console.log(windowWidth);
+
   const adicionais = [
     {
       img: molho,
@@ -60,7 +60,7 @@ export default function ModalComponent({
 
   useEffect(() => {
     const totalProdutos = produtoSelecionado.reduce((valorTotal, produto) => {
-      console.log(`Produto: ${produto.nome}, Preço: ${produto.preco}, Quantidade: ${produto.quantidade}`);
+      
       return valorTotal + (produto.preco * produto.quantidade);
     }, 0);
     const totalFinal = totalProdutos + valorAdicional;
@@ -297,7 +297,7 @@ export default function ModalComponent({
                   closeModal();
                 }}
               >
-                Continuar Comprando
+                Continuar Adicionando
               </CancelButton>
               <FinalizeButton
                 type="button"
@@ -314,7 +314,7 @@ export default function ModalComponent({
                     troco: 0,
                   };
                   const newOrder = order ? [...order, data] : [data];
-                  toast.success("Pedido adicionado! vá para a finalização");
+                  toast.success("Pedido adicionado! pressione o botão finalizar");
                   createOrder(newOrder);
                   chooseProduct([]);
                   closeModal();

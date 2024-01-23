@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useContextOrder } from "../../Contexts/OrderContext";
 import { toast } from "react-toastify";
 import { ordersApi } from "../../Api/OrdersApi";
+import { UseLowerCase } from "../../Hooks/useLowerCase";
 
 type ClientModalProps = {
   openClientModal: boolean;
@@ -29,20 +30,20 @@ export const ClientModal: React.FC<ClientModalProps> = ({
     if (nomeCliente && formaPagamento) {
       if (
         (formaPagamento !== "dinheiro" &&
-          formaPagamento !== "pix" &&
-          formaPagamento !== "cartão") ||
+        formaPagamento !== "pix" &&
+        formaPagamento  !== "cartão") ||
         (formaPagamento === "dinheiro" && troco === "")
       ) {
-        toast.warn("Preencha o campo de troco");
+        toast.warn("Preencha o campo apenas com as opções sugeridas");
         setTroco("");
         setFormaPagamento("");
       } else {
         if (order) {
           (order[0].nomeCliente = nomeCliente),
-            (order[0].metodoPagamento = formaPagamento),
+            order[0].metodoPagamento = formaPagamento as "dinheiro" | "pix" | "cartão" | null;
             (order[0].troco = Number(troco)),
             (order[0].status = "preparando");
-
+          toast.info("Solicitação em andamento aguarde a confirmação!");
           try {
             const result = await ordersApi.postOrder(order[0]);
             if (result) {
@@ -55,6 +56,8 @@ export const ClientModal: React.FC<ClientModalProps> = ({
           } catch (error) {
             console.log(error);
             toast.error("Erro ao realizar pedido!");
+            setFormaPagamento("");
+            setNomeCliente("");
           }
         }
 
@@ -90,7 +93,8 @@ export const ClientModal: React.FC<ClientModalProps> = ({
                 required
                 value={formaPagamento}
                 onChange={(e) => {
-                  setFormaPagamento(e.target.value);
+                  const palavra = UseLowerCase(e.target.value)
+                  setFormaPagamento(palavra);
                 }}
               ></input>
 
@@ -118,7 +122,7 @@ export const ClientModal: React.FC<ClientModalProps> = ({
                   Cancelar
                 </CancelButton>
                 <FinalizeButton className="formButton" type="submit">
-                  Finalizar
+                  Finalizar pedido
                 </FinalizeButton>
               </div>
             </form>

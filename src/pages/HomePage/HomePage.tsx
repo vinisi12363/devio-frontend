@@ -21,6 +21,7 @@ import { useContextProduct } from "../../Contexts/ProductContext";
 import ModalComponent from "../../Components/OrderModal/index";
 import { ClientModal } from "../../Components/ClientModal";
 import { useContextWindowWidth } from "../../Contexts/windowSizeContext";
+import { toast } from "react-toastify";
 
 export default function HomePage() {
   const [products, setProducts] = useState<Produto[]>([]);
@@ -46,6 +47,7 @@ export default function HomePage() {
   useEffect(() => {
   
     const fetchProducts = async () => {
+      toast.info("Carregando produtos...");
       try {
         const result = await ProductsApi.getAllProducts();
         if (result) {
