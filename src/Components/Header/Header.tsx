@@ -42,16 +42,7 @@ export const HeaderLogo = styled.div`
     color: #fff;
     cursor: pointer;
   }
-  @media(max-width: 415px) {
-    max-width: 11dvh;
-    background-color: blue;
-    height: auto;
-    p{
-      font-size: 0.5rem;
-      color: black;
-    }
   
-  }
 `;
 
 export const HeaderOptionContainer = styled.div`

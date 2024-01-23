@@ -1,17 +1,18 @@
 import styled from "styled-components";
 
-export const KitchenBody = styled.div`
+export const KitchenSuperBody = styled.div`
   width: 100%;
-  background-color: blue;
+  background-color: white;
   display: flex;
   flex-direction: row;
   align-items: start;
   margin-top: 2vh;
   box-sizing: border-box;
   @media (max-width: 768px) {
-    brackground-color: green;
-    flex-direction: row;
-    height: 100%;
+    brackground-color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
     width: 100%;
     display: flex;
   }
@@ -31,7 +32,9 @@ export const KitchenPreparingBox = styled.div`
   @media (max-width: 768px) {
     brackground-color: green;
     border-right: none;
+    max-height: 40dvh;
     border-bottom: 4px solid #000;
+    overflow-y: scroll;
   }
 `;
 export const KitchenReadyBox = styled.div`
@@ -44,5 +47,7 @@ export const KitchenReadyBox = styled.div`
   box-sizing: border-box;
   @media (max-width: 768px) {
     brackground-color: green;
+    max-height: 51dvh;
+    overflow-y: scroll;
   }
 `;

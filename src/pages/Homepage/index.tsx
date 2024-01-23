@@ -31,7 +31,7 @@ export default function HomePage() {
   const [searchProduct, setSearchProduct] = useState("" as string);
   const [openClientModal, setOpenClientModal] = useState(false);
   const {windowWidth , refreshWindowWidth} = useContextWindowWidth();
-  console.log(windowWidth);
+  
 
   useEffect(() => {
     const handleResize = () => {

@@ -12,7 +12,7 @@ interface WindowProviderProps {
 const windowWidthContext = createContext<WindowContextType | undefined>(undefined);
 
 const WindowWidthProvider: React.FC<WindowProviderProps> = ({ children }) => {
-  const [windowWidth, setWindowWidth] = useState<number>(0);
+  const [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
 
   
   const refreshWindowWidth = (width: number) => {

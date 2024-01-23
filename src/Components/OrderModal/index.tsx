@@ -36,6 +36,7 @@ export default function ModalComponent({
   const [valorTotal, setValorTotal] = useState<number>(0);
   const [obs, setObs] = useState<string>("");
   const {windowWidth } = useContextWindowWidth();
+  console.log(windowWidth);
   const adicionais = [
     {
       img: molho,
@@ -138,8 +139,8 @@ export default function ModalComponent({
               return (
                 <>
                   <ModalOrderContainer modalIsOpen={openModal}>
-                    <div className="cardMobile">
-                      <ShowCardContainer displayType="flex" pointerEvents="auto" color={"Crimson"}>
+                    <div>
+                      <ShowCardContainer displayType={windowWidth >= 768 ? "flex" : "none"} pointerEvents="auto" color={"Crimson"}>
                         <img
                           src={
                             productChoosen?.imagem === "RefrigerantePng"

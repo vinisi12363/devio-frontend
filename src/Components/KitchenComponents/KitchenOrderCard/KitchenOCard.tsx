@@ -51,6 +51,9 @@ export const CardContainer = styled.div<CardProps>`
     margin-top: 10px;
     margin-bottom: 10px;
   }
+  @media(max-width: 768px) {
+    width: 90%;
+  }
 `;
 
 export const StyledImgArea = styled.div`

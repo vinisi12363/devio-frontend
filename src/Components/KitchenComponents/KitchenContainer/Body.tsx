@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export const MainBody = styled.div`
-  width: 100vw;
-  height: 100dvh;
+export const KicthenMainBody = styled.div`
+  width: 100%;
+  min-height: 100dvh;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -10,13 +10,13 @@ export const MainBody = styled.div`
   box-sizing: border-box;
   @media (max-width: 768px) {
     min-width: 100%;
-  
+    min-height: 100dvh;
     background-color: white;
   }
 `;
-export const PageBody = styled.div`
+export const KicthenPageBody = styled.div`
   width: 90%;
-  height: 100dvh;
+  min-height: 100dvh;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -25,8 +25,8 @@ export const PageBody = styled.div`
   margin-top: 10vh;
   @media (max-width: 768px) {
     min-width: 100%;
-    height: auto;
-    background-color: white;
+    min-height: auto;
+    background-color: red;
     margin-top: 7.4dvh;
   }
 `;

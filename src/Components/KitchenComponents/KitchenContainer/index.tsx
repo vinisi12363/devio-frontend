@@ -1,4 +1,4 @@
-import { KitchenBody } from "./KitchenBody";
+import { KitchenSuperBody } from "./KitchenBody";
 
 type KitchenContainerProps = {
   children: React.ReactNode;
@@ -7,5 +7,5 @@ type KitchenContainerProps = {
 export const KitchenContainer: React.FC<KitchenContainerProps> = ({
   children,
 }) => {
-  return <KitchenBody>{children}</KitchenBody>;
+  return <KitchenSuperBody>{children}</KitchenSuperBody>;
 };

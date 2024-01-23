@@ -1,5 +1,5 @@
-import { MainContainer } from "../../Components/MainContainer";
-import { PageBody } from "../../Components/MainContainer/Body";
+import {KicthenMainBody} from "../../Components/KitchenComponents/KitchenContainer/Body";
+import {KicthenPageBody} from "../../Components/KitchenComponents/KitchenContainer/Body";
 import { Title } from "../../Components/Title";
 import Header from "../../Components/Header";
 import { KitchenContainer } from "../../Components/KitchenComponents/KitchenContainer";
@@ -33,8 +33,8 @@ export default function KitchenPage() {
   }, []);
 
   return (
-    <MainContainer>
-      <PageBody>
+    <KicthenMainBody>
+      <KicthenPageBody>
         <Header></Header>
         <KitchenContainer>
           <KitchenPreparingBox>
@@ -46,7 +46,7 @@ export default function KitchenPage() {
             <KitchenOrderCard statusType="pronto"></KitchenOrderCard>
           </KitchenReadyBox>
         </KitchenContainer>
-      </PageBody>
-    </MainContainer>
+      </KicthenPageBody>
+    </KicthenMainBody>
   );
 }
