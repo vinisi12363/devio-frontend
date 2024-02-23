@@ -67,7 +67,7 @@ export const ShowCardContainer = styled.div<styledCardProps>`
   }
 
   margin: 25px 25px 35px 10px;
-  background-image: url("https://img.freepik.com/free-vector/color-doodle-food-burger-pattern_1409-3918.jpg");
+  background-color: crimson;
   background-size: cover;
   background-position: center;
   img {

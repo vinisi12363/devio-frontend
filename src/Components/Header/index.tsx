@@ -1,4 +1,4 @@
-import { HeaderInfo, HeaderOptionContainer, HeaderLogo } from "./Header";
+import { HeaderInfo, HeaderOptionContainer, HeaderLogo, HeaderLoginContainer} from "./Header";
 import { Link } from "react-router-dom";
 
 export default function Header() {
@@ -20,6 +20,14 @@ export default function Header() {
           <p>Retirada</p>
         </Link>
       </HeaderOptionContainer>
+      <HeaderLoginContainer>
+        <Link className="pageLink" to={"/login"}>
+          <p>Login</p>
+        </Link>
+        <Link className="pageLink" to={"/cadastro"}>
+          <p>Cadastro</p>
+        </Link>
+      </HeaderLoginContainer>
     </HeaderInfo>
   );
 }

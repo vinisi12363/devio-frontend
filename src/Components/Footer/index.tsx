@@ -29,14 +29,14 @@ export const Footer: React.FC<FooterProps> = ({ setOpenClientModal }) => {
   };
   return (
     <FooterContainer>
-      <CancelOrderButton
+      <CancelOrderButton buttonColor={order?.length?? 0 > 0 ? 'Crimson': '#f9f9f9'} TextButtonColor={ order?.length?? 0 > 0 ? 'white': 'black'}
         onClick={() => {
           confirmCancel();
         }}
       >
         <Title text="Cancelar" textSize="30"></Title>
       </CancelOrderButton>
-      <FinalizeOrderButton
+      <FinalizeOrderButton buttonColor={order?.length?? 0 > 0 ? 'Crimson': '#f9f9f9'} TextButtonColor={ order?.length?? 0 > 0 ? 'white': 'black'}
         onClick={() => {
           confirmFinalize();
         }}

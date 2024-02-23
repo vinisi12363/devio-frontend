@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import { HomePage, KitchenPage , TakeOutPage } from "./pages";
+import { HomePage, KitchenPage , TakeOutPage, SignUpPage } from "./pages";
 import { CategoryProvider } from "./Contexts/CategoryContext";
 import { ProductProvider } from "./Contexts/ProductContext";
 import { OrderProvider } from "./Contexts/OrderContext";
@@ -20,6 +20,7 @@ function App() {
                 <Route path="/" Component={HomePage}></Route>
                 <Route path="/cozinha" Component={KitchenPage}></Route>
                 <Route path="/retirada" Component={TakeOutPage}></Route>
+                <Route path="/cadastro" Component={SignUpPage}></Route>
               </Routes>
             </BrowserRouter>
           </CategoryProvider>

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HeaderInfo = styled.div`
-  width: 90%;
+  width: 100vw;
   height: 10vh;
   background-color: Crimson;
   display: flex;
@@ -47,6 +47,40 @@ export const HeaderLogo = styled.div`
 
 export const HeaderOptionContainer = styled.div`
   width: 30%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  p {
+    font-family: "Roboto", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.1);
+      border-radius: 10px;
+      background-color: red;
+    }
+  }
+  @media(max-width: 768px) {
+    background-color:  Crimson;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    p{
+      font-size: 1rem;
+      color: white;
+      font-weight: 700;
+    }
+  }
+`;
+
+export const HeaderLoginContainer = styled.div`
+  width: 15%;
   height: 100%;
   display: flex;
   flex-direction: row;
